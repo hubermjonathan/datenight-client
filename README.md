@@ -1,5 +1,5 @@
-# tbd
-project for CS408
+# DateNight
+frontend of project for CS408 group 2
 
 ## members
 jon huber
