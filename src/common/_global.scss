@@ -1,6 +1,12 @@
-$font-stack: Arial, Helvetica, sans-serif;
+$font-stack: IBM Plex Sans, Arial, sans-serif;
 $text-1: #FFFFFF;
 $text-2: #006494;
 $primary: #1B98E0;
 $background: #13293D;
-$box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.16);
+$box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.16);
+$box-shadow-hover: 0px 4px 4px 0px rgba(0, 0, 0, 0.16);
+
+a {
+  text-decoration: none;
+  color: $text-1;
+}
