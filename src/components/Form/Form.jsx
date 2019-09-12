@@ -30,7 +30,7 @@ function Form() {
         </div>
 
         <div className="submitButton">
-          <RouterButton to="/">find dates</RouterButton>
+          <RouterButton linkTo="/">find dates</RouterButton>
         </div>
       </div>
     </div>
