@@ -1,1 +1,36 @@
 @import "../../common/global";
+
+.landing {
+  display: grid;
+  grid-template:
+    ". ." 3fr
+    "title button" 1fr
+    "description ." 1fr
+    ". ." 3fr
+    / 1fr 1fr;
+  height: 100vh;
+  background-color: $primary;
+}
+
+.title {
+  grid-area: title;
+  justify-self: end;
+  align-self: end;
+  font-size: 7rem;
+  font-weight: 600;
+  color: $text-1;
+}
+
+.description {
+  grid-area: description;
+  justify-self: end;
+  align-self: start;
+  font-size: 2rem;
+  color: $text-1;
+}
+
+.button {
+  grid-area: button;
+  justify-self: center;
+  align-self: end;
+}
