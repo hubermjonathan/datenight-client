@@ -2,4 +2,74 @@
 
 .form {
   display: grid;
+  grid-template:
+    ". . ." 1fr
+    ". card ." 10fr
+    ". . ." 1fr
+    / 2fr 3fr 2fr;
+  height: 100vh;
+  background-color: $background;
+}
+
+.card {
+  grid-area: card;
+  display: grid;
+  grid-template:
+    "title" 2fr
+    "location" 2fr
+    "price" 2fr
+    "type" 2fr
+    "time" 2fr
+    "submit" 2fr
+    / auto;
+  height: 100%;
+  background-color: $primary;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
+
+.cardTitle {
+  grid-area: title;
+  place-self: center;
+  font-size: 2.5rem;
+  font-weight: $bold;
+}
+
+.inputLabel {
+  font-size: 1.75rem;
+  font-weight: $bold;
+}
+
+.locationInput {
+  grid-area: location;
+  justify-self: start;
+  align-self: center;
+  padding: 0 2rem;
+}
+
+.priceRangeInput {
+  grid-area: price;
+  justify-self: start;
+  align-self: center;
+  padding: 0 2rem;
+}
+
+.typeInput {
+  grid-area: type;
+  justify-self: start;
+  align-self: center;
+  padding: 0 2rem;
+}
+
+.timeInputs {
+  grid-area: time;
+  justify-self: start;
+  align-self: center;
+  padding: 0 2rem;
+}
+
+.submitButton {
+  grid-area: submit;
+  place-self: center;
 }

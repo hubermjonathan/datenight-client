@@ -35,8 +35,7 @@ describe('<Form />', () => {
   });
 
   it('renders the time inputs', () => {
-    expect(wrapper.find('.minTimeInput')).toHaveLength(1);
-    expect(wrapper.find('.maxTimeInput')).toHaveLength(1);
+    expect(wrapper.find('.timeInputs')).toHaveLength(1);
   });
 
   it('renders the submit button', () => {
