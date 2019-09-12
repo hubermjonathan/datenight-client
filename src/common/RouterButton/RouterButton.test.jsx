@@ -8,6 +8,6 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('<RouterButton />', () => {
   it('renders the button', () => {
     const wrapper = Enzyme.shallow(<RouterButton linkTo="/" />);
-    expect(wrapper.find('.button').length).toBe(1);
+    expect(wrapper.find('.routerButton').length).toBe(1);
   });
 });

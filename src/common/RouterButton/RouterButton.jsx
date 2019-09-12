@@ -8,7 +8,7 @@ function RouterButton(props) {
 
   return (
     <Link to={linkTo}>
-      <div className="button">
+      <div className="routerButton">
         { children }
       </div>
     </Link>
