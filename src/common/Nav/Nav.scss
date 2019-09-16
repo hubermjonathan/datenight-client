@@ -1,0 +1,49 @@
+@import "../../common/global";
+
+.nav {
+  grid-area: nav;
+  display: grid;
+  grid-template:
+    "logo tabs account" 1fr
+    / 1fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  background-color: $primary;
+}
+
+.logo {
+  grid-area: logo;
+  height: 100%;
+  font-size: 1.75rem;
+  font-weight: $bold;
+}
+
+.logo a:hover {
+  color: $text-1 !important;
+  text-decoration: none !important;
+}
+
+.tabs {
+  grid-area: tabs;
+  justify-self: center;
+}
+
+.tab {
+  font-size: 1.75rem;
+  display: inline-block;
+  padding: 0 1rem;
+}
+
+.tab.active {
+  font-weight: $bold;
+}
+
+.account {
+  grid-area: account;
+  justify-self: end;
+  font-size: 1.75rem;
+}
+
+.account a:hover {
+  color: $text-1 !important;
+  text-decoration: none !important;
+}
