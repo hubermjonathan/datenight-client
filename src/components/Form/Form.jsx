@@ -33,6 +33,8 @@ function Form() {
       setMinTime(0);
     } else if (maxTime !== '' && newValue > maxTime) {
       setMinTime(maxTime);
+    } else if (newValue > 10) {
+      setMinTime(10);
     } else {
       setMinTime(newValue);
     }
@@ -44,6 +46,8 @@ function Form() {
       setMaxTime(10);
     } else if (minTime !== '' && newValue < minTime) {
       setMaxTime(minTime);
+    } else if (newValue < 0) {
+      setMaxTime(0);
     } else {
       setMaxTime(newValue);
     }
