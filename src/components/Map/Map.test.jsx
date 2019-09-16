@@ -22,22 +22,6 @@ describe('<Map />', () => {
   ];
   const wrapper = Enzyme.shallow(<Map pins={pins} />);
 
-  it('renders the navbar', () => {
-    expect(wrapper.find('.nav')).toHaveLength(1);
-  });
-
-  it('renders the logo', () => {
-    expect(wrapper.find('.logo')).toHaveLength(1);
-  });
-
-  it('renders the tab menu', () => {
-    expect(wrapper.find('.tabs')).toHaveLength(1);
-  });
-
-  it('renders the account icon', () => {
-    expect(wrapper.find('.account')).toHaveLength(1);
-  });
-
   it('renders the map container', () => {
     expect(wrapper.find('.mapContainer')).toHaveLength(1);
   });
