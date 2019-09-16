@@ -23,6 +23,7 @@
     "submit" 2fr
     / auto;
   height: 100%;
+  padding: 0 2rem;
   background-color: $primary;
   -webkit-border-radius: $border-radius;
   -moz-border-radius: $border-radius;
@@ -39,34 +40,50 @@
 .inputLabel {
   font-size: 1.75rem;
   font-weight: $bold;
+  padding: 0 0 0.5rem 0;
+}
+
+.form-control {
+  color: $text-2;
+  -moz-border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
+
+.form-control:focus {
+  color: $text-2;
 }
 
 .locationInput {
   grid-area: location;
   justify-self: start;
   align-self: center;
-  padding: 0 2rem;
+  width: 100%;
 }
 
 .priceRangeInput {
   grid-area: price;
   justify-self: start;
   align-self: center;
-  padding: 0 2rem;
+  width: 100%;
 }
 
 .typeInput {
   grid-area: type;
   justify-self: start;
   align-self: center;
-  padding: 0 2rem;
+  width: 100%;
 }
 
 .timeInputs {
   grid-area: time;
   justify-self: start;
   align-self: center;
-  padding: 0 2rem;
+  width: 100%;
+}
+
+.timeInputDivider {
+  font-size: 2rem;
 }
 
 .submitButton {
