@@ -20,4 +20,21 @@
   -moz-box-shadow: $box-shadow-hover;
   box-shadow: $box-shadow-hover;
   transform: translateY(-1px);
+  cursor: pointer;
+}
+
+.routerButtonDisabled {
+  display: inline-block;
+  background-color: $text-1;
+  font-size: 2rem;
+  font-weight: 600;
+  color: $text-2;
+  padding: 1rem 3.5rem;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+  opacity: 0.75;
 }
