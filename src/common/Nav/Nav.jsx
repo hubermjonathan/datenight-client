@@ -14,10 +14,18 @@ function Nav(props) {
         <Link to="/">DateNight</Link>
       </div>
 
-      <div className="tabs">
-        <div className={mapTabClassName}>Map</div>
-        <div className={listTabClassName}>List</div>
-      </div>
+      { currentPage === 'map' && (
+        <div className="tabs">
+          <div className={mapTabClassName}>Map</div>
+          <Link to="/list"><div className={listTabClassName}>List</div></Link>
+        </div>
+      )}
+      { currentPage === 'list' && (
+        <div className="tabs">
+          <Link to="/map"><div className={mapTabClassName}>Map</div></Link>
+          <div className={listTabClassName}>List</div>
+        </div>
+      )}
 
       <div className="account">
         <Link to="/sign-in">
