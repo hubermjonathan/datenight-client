@@ -1,0 +1,28 @@
+@import "../../common/global";
+
+.map {
+  display: grid;
+  grid-template:
+    "nav" 7%
+    "map" 93%
+    / 1fr;
+  height: 100vh;
+  background-color: $background;
+}
+
+#mapContainer {
+  height: 100%;
+}
+
+.popup {
+  background: $text-1;
+  color: $text-2;
+  padding: 0.5rem;
+}
+
+.popup .title {
+  font-size: 1.25rem;
+  font-weight: $bold;
+  color: $text-2;
+  padding: 0 0 0.5rem 0;
+}

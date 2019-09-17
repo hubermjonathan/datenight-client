@@ -8,6 +8,9 @@
     / 1fr 1fr 1fr;
   padding: 0.75rem 1rem;
   background-color: $primary;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
 }
 
 .logo {

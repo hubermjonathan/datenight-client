@@ -89,4 +89,34 @@
 .submitButton {
   grid-area: submit;
   place-self: center;
+  display: inline-block;
+  background-color: $text-1;
+  font-size: 2rem;
+  font-weight: $bold;
+  color: $text-2;
+  padding: 1rem 3.5rem;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+  border: none;
+}
+
+.submitButton:hover {
+  -webkit-box-shadow: $box-shadow-hover;
+  -moz-box-shadow: $box-shadow-hover;
+  box-shadow: $box-shadow-hover;
+  transform: translateY(-1px);
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  transform: none;
+  cursor: default;
+  opacity: 0.75;
 }
