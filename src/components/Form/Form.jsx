@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 import './Form.scss';
-import RouterButton from '../../common/RouterButton/RouterButton';
 
 function Form() {
   const [location, setLocation] = useState('');
@@ -9,6 +9,8 @@ function Form() {
   const [minTime, setMinTime] = useState('');
   const [maxTime, setMaxTime] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [pins, setPins] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
   function onChangeLocation(event) {
     setLocation(event.target.value);
@@ -62,8 +64,55 @@ function Form() {
       maxTime,
     };
 
+    // eslint-disable-next-line no-unused-vars
+    const data = [
+      {
+        location: {
+          lat: 37.250204,
+          lng: -121.844305,
+        },
+        name: 'Happy Lemon',
+        phone: '(408) 622-6785',
+        website: 'postmates.com',
+        hours: 'open until 10pm today',
+      },
+      {
+        location: {
+          lat: 37.321751,
+          lng: -121.971519,
+        },
+        name: '7 Leaves',
+        phone: '(408) 618-8401',
+        website: 'no website',
+        hours: 'open until 11pm today',
+      },
+      {
+        location: {
+          lat: 37.420849,
+          lng: -121.916505,
+        },
+        name: 'Fantasia',
+        phone: '(408) 260-1668',
+        website: 'doordash.com',
+        hours: 'open until 10pm today',
+      },
+    ];
+
+    setPins(data);
+    setRedirect(true);
+
     // eslint-disable-next-line no-console
     console.log(formData);
+  }
+
+  if (redirect) {
+    return (
+      <Redirect to={{
+        pathname: '/map',
+        state: { pins },
+      }}
+      />
+    );
   }
 
   return (
@@ -121,9 +170,7 @@ function Form() {
           </div>
         </div>
 
-        <div className="submitButton">
-          <RouterButton linkTo="/" onClick={handleSubmit} disabled={buttonDisabled}>find dates</RouterButton>
-        </div>
+        <button type="button" className="submitButton" onClick={handleSubmit} disabled={buttonDisabled}>find dates</button>
       </div>
     </div>
   );

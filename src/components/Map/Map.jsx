@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import './Map.scss';
 import Nav from '../../common/Nav/Nav';
 
 function Map(props) {
-  const { pins } = props;
+  const { location } = props;
+  const { pins } = location.state;
 
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById('mapContainer'), {
@@ -45,22 +46,5 @@ function Map(props) {
     </div>
   );
 }
-
-Map.defaultProps = {
-  pins: [],
-};
-
-Map.propTypes = {
-  pins: PropTypes.arrayOf(PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number,
-      lng: PropTypes.number,
-    }),
-    name: PropTypes.string,
-    phone: PropTypes.string,
-    website: PropTypes.string,
-    hours: PropTypes.string,
-  })),
-};
 
 export default Map;
