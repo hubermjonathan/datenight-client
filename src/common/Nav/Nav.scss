@@ -55,3 +55,13 @@
   color: $text-1 !important;
   text-decoration: none !important;
 }
+
+.button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: $text-1;
+}
+
+.button i {
+  margin: 0 0 0 1rem;
+}
