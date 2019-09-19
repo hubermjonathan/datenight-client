@@ -5,11 +5,11 @@ import Nav from '../../common/Nav/Nav';
 
 function Map(props) {
   const { location } = props;
-  const { pins } = location.state;
+  const { pins, center } = location.state;
 
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById('mapContainer'), {
-      center: { lat: 37.3382, lng: -121.8863 },
+      center,
       zoom: 12,
       disableDefaultUI: true,
     });
