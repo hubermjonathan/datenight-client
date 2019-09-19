@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import './Form.scss';
 
 function Form() {
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState({});
   const [priceRange, setPriceRange] = useState(1);
   const [type, setType] = useState([]);
   const [minTime, setMinTime] = useState('');
@@ -12,14 +12,30 @@ function Form() {
   const [pins, setPins] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
-  function onChangeLocation(event) {
-    setLocation(event.target.value);
-    if (event.target.value !== '') {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
+  useEffect(() => {
+    if (document.getElementById('locationInput') === null) {
+      return;
     }
-  }
+
+    const auto = new window.google.maps.places.Autocomplete(document.getElementById('locationInput'));
+
+    auto.addListener('place_changed', () => {
+      const place = auto.getPlace();
+
+      if (!place.geometry) {
+        setButtonDisabled(true);
+        return;
+      }
+
+      const autoLocation = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      };
+
+      setLocation(autoLocation);
+      setButtonDisabled(false);
+    });
+  });
 
   function onChangePriceRange(event) {
     setPriceRange(event.target.value);
@@ -128,7 +144,7 @@ function Form() {
 
         <div className="locationInput">
           <div className="inputLabel">where are you?</div>
-          <input className="form-control" onChange={onChangeLocation} value={location} />
+          <input className="form-control" id="locationInput" placeholder="enter a location" />
         </div>
 
         <div className="priceRangeInput">
