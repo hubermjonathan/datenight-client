@@ -28,8 +28,26 @@ function Map(props) {
         },
       });
 
+      let popupContentString = '<div class="popup">';
+      if (pins[i].name) {
+        popupContentString += `<div class="title">${pins[i].name}</div>`;
+      }
+      if (pins[i].rating) {
+        popupContentString += `<div>${pins[i].rating} stars</div>`;
+      }
+      if (pins[i].address) {
+        popupContentString += `<div>${pins[i].address}</div>`;
+      }
+      if (pins[i].phone) {
+        popupContentString += `<div>${pins[i].phone}</div>`;
+      }
+      if (pins[i].website) {
+        popupContentString += `<a href="${pins[i].website}">visit their website</a>`;
+      }
+      popupContentString += '</div>';
+
       const popup = new window.google.maps.InfoWindow({
-        content: `<div class="popup"><div class="title">${pins[i].name}</div><div>${pins[i].phone}</div><div>${pins[i].website}</div><div>${pins[i].hours}</div></div>`,
+        content: popupContentString,
       });
 
       marker.addListener('click', () => {
