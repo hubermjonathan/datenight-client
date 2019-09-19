@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
+import { useAuth0 } from '../authHook';
 
 function Nav(props) {
   const { currentPage } = props;
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const mapTabClassName = currentPage === 'map' ? 'tab active' : 'tab';
   const listTabClassName = currentPage === 'list' ? 'tab active' : 'tab';
 
@@ -28,9 +30,21 @@ function Nav(props) {
       )}
 
       <div className="account">
-        <Link to="/sign-in">
-          <i className="fas fa-user-circle" />
-        </Link>
+        { !isAuthenticated && (
+          <button className="button" type="button" onClick={() => loginWithRedirect({})}>
+            Log In
+            <i className="fas fa-user-circle" />
+          </button>
+        )}
+
+        { isAuthenticated && (
+          <button className="button" type="button" onClick={() => logout()}>
+            Hello,
+            {' '}
+            { user.name }
+            <i className="fas fa-user-circle" />
+          </button>
+        )}
       </div>
     </div>
   );
