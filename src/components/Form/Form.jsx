@@ -5,7 +5,7 @@ import './Form.scss';
 function Form() {
   const [location, setLocation] = useState('');
   const [priceRange, setPriceRange] = useState(1);
-  const [type, setType] = useState('anything');
+  const [type, setType] = useState([]);
   const [minTime, setMinTime] = useState('');
   const [maxTime, setMaxTime] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -26,7 +26,13 @@ function Form() {
   }
 
   function onChangeType(event) {
-    setType(event.target.value);
+    if (type.includes(event.target.value)) {
+      const tempTypes = type.slice();
+      tempTypes.splice(tempTypes.indexOf(event.target.value), 1);
+      setType([...tempTypes]);
+    } else {
+      setType([...type, event.target.value]);
+    }
   }
 
   function onChangeMinTime(event) {
@@ -98,7 +104,7 @@ function Form() {
       },
     ];
 
-    setPins(data);
+    setPins([...pins, ...data]);
     setRedirect(true);
 
     // eslint-disable-next-line no-console
@@ -131,13 +137,13 @@ function Form() {
             <option value="1">$</option>
             <option value="2">$$</option>
             <option value="3">$$$</option>
+            <option value="4">$$$$</option>
           </select>
         </div>
 
         <div className="typeInput">
           <div className="inputLabel">what kind of dates are you looking for?</div>
-          <select className="form-control" onChange={onChangeType} value={type}>
-            <option>anything</option>
+          <select multiple className="form-control" onChange={onChangeType} value={type}>
             <option>entertainment</option>
             <option>food</option>
             <option>nightlife</option>
