@@ -6,7 +6,12 @@ import { useAuth0 } from '../authHook';
 
 function Nav(props) {
   const { currentPage } = props;
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    user,
+  } = useAuth0();
   const mapTabClassName = currentPage === 'map' ? 'tab active' : 'tab';
   const listTabClassName = currentPage === 'list' ? 'tab active' : 'tab';
 

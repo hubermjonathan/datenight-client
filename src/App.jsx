@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // auth imports
-// import * as serviceWorker from './common/serviceWorker';
 import { Auth0Provider } from './common/authHook';
 import config from './auth-config.json';
 
@@ -41,5 +40,3 @@ ReactDOM.render(
   </Auth0Provider>,
   document.getElementById('app-root'),
 );
-
-// serviceWorker.unregister();
