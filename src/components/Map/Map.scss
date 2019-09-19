@@ -26,3 +26,12 @@
   color: $text-2;
   padding: 0 0 0.5rem 0;
 }
+
+.popup a {
+  color: $text-2;
+}
+
+.popup a:hover {
+  color: $primary;
+  text-decoration: none;
+}

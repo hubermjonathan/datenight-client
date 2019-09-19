@@ -131,7 +131,7 @@ function Form() {
     return (
       <Redirect to={{
         pathname: '/map',
-        state: { pins },
+        state: { pins, center: location },
       }}
       />
     );
