@@ -79,52 +79,25 @@ function Form() {
 
   function handleSubmit() {
     const formData = {
-      location,
-      priceRange,
-      type,
+      coordinates: [location.lat, location.lng],
+      priceLevel: +priceRange,
+      dateTypes: type,
       minTime,
       maxTime,
     };
 
-    // eslint-disable-next-line no-unused-vars
-    const data = [
-      {
-        location: {
-          lat: 37.250204,
-          lng: -121.844305,
-        },
-        name: 'Happy Lemon',
-        phone: '(408) 622-6785',
-        website: 'postmates.com',
-        hours: 'open until 10pm today',
+    fetch('https://datenight-api-251515.appspot.com/getVenues', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        location: {
-          lat: 37.321751,
-          lng: -121.971519,
-        },
-        name: '7 Leaves',
-        phone: '(408) 618-8401',
-        website: 'no website',
-        hours: 'open until 11pm today',
-      },
-      {
-        location: {
-          lat: 37.420849,
-          lng: -121.916505,
-        },
-        name: 'Fantasia',
-        phone: '(408) 260-1668',
-        website: 'doordash.com',
-        hours: 'open until 10pm today',
-      },
-    ];
-
-    setPins([...pins, ...data]);
-    setRedirect(true);
-
-    // eslint-disable-next-line no-console
-    console.log(formData);
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setPins([...pins, ...json]);
+        setRedirect(true);
+      });
   }
 
   if (redirect) {
@@ -187,7 +160,7 @@ function Form() {
             </div>
 
             <div className="col-3 inputLabel">
-            hour(s)
+              hour(s)
             </div>
           </div>
         </div>
