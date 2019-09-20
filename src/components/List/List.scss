@@ -1,0 +1,49 @@
+@import "../../common/global";
+
+.list {
+  display: grid;
+  grid-template:
+    "nav" 7%
+    "list" 93%
+    / 1fr;
+  height: 100vh;
+  background-color: $background;
+}
+
+.cardsContainer {
+  height: 100%;
+  grid-area: list;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1.5rem;
+  padding: 1rem;
+}
+
+.listCard {
+  font-size: 2rem;
+  height: 20rem;
+  padding: 2rem;
+  background-color: $text-1;
+  color: $text-2;
+  -moz-box-shadow: $box-shadow;
+  -webkit-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  -moz-border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
+
+.listCard a {
+  color: $text-2;
+}
+
+.listCard a:hover {
+  color: $primary;
+  text-decoration: none;
+}
+
+.listCardTitle {
+  font-size: 3rem;
+  font-weight: $bold;
+}
