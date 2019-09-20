@@ -14,15 +14,15 @@ function List(props) {
         <div className="listCardTitle">{results[i].name}</div>
         {results[i].rating
           && (
-            <div>
+            <div className="listCardRating">
               {results[i].rating}
               {' '}
               stars
             </div>
           )}
-        <div>{results[i].address}</div>
-        <div>{results[i].phone}</div>
-        <a href={results[i].website}>visit their website</a>
+        <div className="listCardAddress">{results[i].address}</div>
+        <div className="listCardPhone">{results[i].phone}</div>
+        <a className="listCardWebsite" href={results[i].website}>visit their website</a>
       </div>,
     );
   }
