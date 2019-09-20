@@ -47,8 +47,4 @@ describe('<Map />', () => {
   it('renders the map container', () => {
     expect(wrapper.find('.mapContainer')).toHaveLength(1);
   });
-
-  it.skip('renders the pins', () => {
-    expect(wrapper.find('img')).toHaveLength(pins.length);
-  });
 });
