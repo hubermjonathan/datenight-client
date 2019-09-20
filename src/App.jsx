@@ -10,6 +10,7 @@ import config from './auth-config.json';
 import Landing from './components/Landing/Landing';
 import Form from './components/Form/Form';
 import Map from './components/Map/Map';
+import List from './components/List/List';
 
 const onRedirectCallback = (appState) => {
   window.history.replaceState(
@@ -26,6 +27,7 @@ const App = () => (
     <Route path="/" exact component={Landing} />
     <Route path="/form" exact component={Form} />
     <Route path="/map" exact component={Map} />
+    <Route path="/list" exact component={List} />
   </Router>
 );
 
