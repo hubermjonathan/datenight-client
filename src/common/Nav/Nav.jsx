@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -5,7 +7,7 @@ import './Nav.scss';
 import { useAuth0 } from '../authHook';
 
 function Nav(props) {
-  const { currentPage } = props;
+  const { currentPage, onClickMap, onClickList } = props;
   const {
     isAuthenticated,
     loginWithRedirect,
@@ -21,32 +23,32 @@ function Nav(props) {
         <Link to="/">DateNight</Link>
       </div>
 
-      { currentPage === 'map' && (
+      {currentPage === 'map' && (
         <div className="tabs">
           <div className={mapTabClassName}>Map</div>
-          <Link to="/list"><div className={listTabClassName}>List</div></Link>
+          <div onClick={onClickList} className={listTabClassName}>List</div>
         </div>
       )}
-      { currentPage === 'list' && (
+      {currentPage === 'list' && (
         <div className="tabs">
-          <Link to="/map"><div className={mapTabClassName}>Map</div></Link>
+          <div onClick={onClickMap} className={mapTabClassName}>Map</div>
           <div className={listTabClassName}>List</div>
         </div>
       )}
 
       <div className="account">
-        { !isAuthenticated && (
+        {!isAuthenticated && (
           <button className="button" type="button" onClick={() => loginWithRedirect({})}>
             Log In
             <i className="fas fa-user-circle" />
           </button>
         )}
 
-        { isAuthenticated && (
+        {isAuthenticated && (
           <button className="button" type="button" onClick={() => logout()}>
             Hello,
             {' '}
-            { user.name }
+            {user.name}
             <i className="fas fa-user-circle" />
           </button>
         )}
@@ -60,6 +62,8 @@ Nav.defaultProps = {
 
 Nav.propTypes = {
   currentPage: PropTypes.string.isRequired,
+  onClickMap: PropTypes.func.isRequired,
+  onClickList: PropTypes.func.isRequired,
 };
 
 export default Nav;

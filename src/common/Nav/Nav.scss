@@ -41,8 +41,16 @@
   padding: 0 1rem;
 }
 
+.tab:hover {
+  cursor: pointer;
+}
+
 .tab.active {
   font-weight: $bold;
+}
+
+.tab.active:hover {
+  cursor: default;
 }
 
 .account {
