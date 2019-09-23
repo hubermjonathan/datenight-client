@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import './Map.scss';
-import Nav from '../../common/Nav/Nav';
 
 function Map(props) {
-  const { location } = props;
-  const { pins, center } = location.state;
+  const { pins, center } = props;
 
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById('mapContainer'), {
@@ -57,11 +55,7 @@ function Map(props) {
   });
 
   return (
-    <div className="map">
-      <Nav currentPage="map" />
-
-      <div className="mapContainer" id="mapContainer" />
-    </div>
+    <div className="mapContainer" id="mapContainer" />
   );
 }
 

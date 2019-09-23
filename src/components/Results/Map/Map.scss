@@ -1,14 +1,4 @@
-@import "../../common/global";
-
-.map {
-  display: grid;
-  grid-template:
-    "nav" 7%
-    "map" 93%
-    / 1fr;
-  height: 100vh;
-  background-color: $background;
-}
+@import "../../../common/global";
 
 #mapContainer {
   height: 100%;

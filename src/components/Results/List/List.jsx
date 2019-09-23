@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './List.scss';
-import Nav from '../../common/Nav/Nav';
 
 function List(props) {
-  const { location } = props;
-  const { results } = location.state;
+  const { results } = props;
 
   function getCards() {
     const createdCards = [];
@@ -33,12 +31,8 @@ function List(props) {
   }
 
   return (
-    <div className="list">
-      <Nav currentPage="list" />
-
-      <div className="cardsContainer">
-        {getCards()}
-      </div>
+    <div className="cardsContainer">
+      {getCards()}
     </div>
   );
 }
