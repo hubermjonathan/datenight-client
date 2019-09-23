@@ -1,18 +1,8 @@
-@import "../../common/global";
-
-.list {
-  display: grid;
-  grid-template:
-    "nav" 7%
-    "list" 93%
-    / 1fr;
-  height: 100vh;
-  background-color: $background;
-}
+@import "../../../common/global";
 
 .cardsContainer {
   height: 100%;
-  grid-area: list;
+  grid-area: page;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -21,7 +11,7 @@
 }
 
 .listCard {
-  font-size: 2rem;
+  font-size: 1.5rem;
   height: 20rem;
   padding: 2rem;
   background-color: $text-1;
@@ -44,6 +34,6 @@
 }
 
 .listCardTitle {
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: $bold;
 }

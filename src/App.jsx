@@ -9,8 +9,7 @@ import config from './auth-config.json';
 // page imports
 import Landing from './components/Landing/Landing';
 import Form from './components/Form/Form';
-import Map from './components/Map/Map';
-import List from './components/List/List';
+import Results from './components/Results/Results';
 
 const onRedirectCallback = (appState) => {
   window.history.replaceState(
@@ -26,8 +25,7 @@ const App = () => (
   <Router>
     <Route path="/" exact component={Landing} />
     <Route path="/form" exact component={Form} />
-    <Route path="/map" exact component={Map} />
-    <Route path="/list" exact component={List} />
+    <Route path="/results" exact component={Results} />
   </Router>
 );
 
