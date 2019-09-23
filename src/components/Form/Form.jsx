@@ -33,7 +33,7 @@ function Form() {
       };
 
       setLocation(autoLocation);
-      setButtonDisabled(false);
+      if (type.length > 0) setButtonDisabled(false);
     });
   });
 
@@ -45,9 +45,18 @@ function Form() {
     if (type.includes(event.target.value)) {
       const tempTypes = type.slice();
       tempTypes.splice(tempTypes.indexOf(event.target.value), 1);
+
       setType([...tempTypes]);
+
+      if (location.lat && type.length - 1 > 0) {
+        setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
+      }
     } else {
       setType([...type, event.target.value]);
+
+      if (location.lat) setButtonDisabled(false);
     }
   }
 
