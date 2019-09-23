@@ -1,0 +1,11 @@
+@import '../../common/_global.scss';
+
+.results {
+  display: grid;
+  grid-template:
+    "nav" 7%
+    "page" 93%
+    / 1fr;
+  height: 100vh;
+  background-color: $background;
+}
