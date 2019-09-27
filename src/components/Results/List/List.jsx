@@ -27,6 +27,11 @@ function List(props) {
         );
       }
     }
+
+    if (createdCards.length === 0) {
+      return <div className="emptyMessage">your search returned no results.</div>;
+    }
+
     return createdCards;
   }
 
