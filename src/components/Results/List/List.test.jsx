@@ -49,6 +49,12 @@ describe('<List />', () => {
     expect(wrapper.find('.listCard')).toHaveLength(results.length);
   });
 
+  it('renders message when no cards exist', () => {
+    const emptyWrapper = Enzyme.mount(<List results={[]} />);
+    expect(emptyWrapper.find('.listCard')).toHaveLength(0);
+    expect(emptyWrapper.find('.emptyMessage').text()).toMatch('your search returned no results.');
+  });
+
   it('renders the card titles', () => {
     expect(wrapper.find('.listCardTitle')).toHaveLength(results.length);
   });
