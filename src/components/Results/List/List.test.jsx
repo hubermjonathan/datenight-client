@@ -13,7 +13,6 @@ describe('<List />', () => {
         lng: -121.844305,
       },
       name: 'Happy Lemon',
-      phone: '(408) 622-6785',
       website: 'postmates.com',
       rating: '4.4',
     },
@@ -24,7 +23,6 @@ describe('<List />', () => {
       },
       name: '7 Leaves',
       phone: '(408) 618-8401',
-      website: 'no website',
       rating: '4.4',
     },
     {
@@ -64,10 +62,14 @@ describe('<List />', () => {
   });
 
   it('renders the card phone numbers', () => {
-    expect(wrapper.find('.listCardPhone')).toHaveLength(results.length);
+    expect(wrapper.find('.listCardPhone')).toHaveLength(results.length - 1);
   });
 
   it('renders the card websites', () => {
     expect(wrapper.find('.listCardWebsite')).toHaveLength(results.length);
+  });
+
+  it('renders a message for no website', () => {
+    expect(wrapper.find('.listCardWebsite').at(1).text()).toMatch('no website');
   });
 });
