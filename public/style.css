@@ -4,6 +4,7 @@ html, body {
   font-size: 8px;
   font-family: IBM Plex Sans, Arial, sans-serif;
   color: #FFFFFF;
+  background-color: #13293D;
 }
 
 @media (min-width: 576px) {
