@@ -63,6 +63,9 @@ describe('<Form />', () => {
     wrapper.find('.minTimeInput').at(0).simulate('change', { target: { value: '4' } });
     expect(wrapper.find('.minTimeInput').at(0).props().value).toEqual(3);
 
+    wrapper.find('.minTimeInput').at(0).simulate('change', { target: { value: 'a' } });
+    expect(wrapper.find('.minTimeInput').at(0).props().value).toEqual(3);
+
     wrapper.find('.maxTimeInput').at(0).simulate('change', { target: { value: '2' } });
     expect(wrapper.find('.maxTimeInput').at(0).props().value).toEqual(3);
 
