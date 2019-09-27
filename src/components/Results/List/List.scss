@@ -10,6 +10,12 @@
   padding: 1rem;
 }
 
+.emptyMessage {
+  place-self: center;
+  font-size: 4rem;
+  font-weight: $bold;
+}
+
 .listCard {
   font-size: 1.5rem;
   height: 20rem;
@@ -34,6 +40,6 @@
 }
 
 .listCardTitle {
-  font-size: 2.75rem;
+  font-size: 2rem;
   font-weight: $bold;
 }

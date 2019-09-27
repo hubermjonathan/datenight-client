@@ -21,12 +21,18 @@ function List(props) {
                 </div>
               )}
             <div className="listCardAddress">{results[i].address}</div>
-            <div className="listCardPhone">{results[i].phone}</div>
-            <a className="listCardWebsite" href={results[i].website}>visit their website</a>
+            {results[i].rating && <div className="listCardPhone">{results[i].phone}</div>}
+            {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
+            {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
           </div>,
         );
       }
     }
+
+    if (createdCards.length === 0) {
+      return <div className="emptyMessage">your search returned no results.</div>;
+    }
+
     return createdCards;
   }
 

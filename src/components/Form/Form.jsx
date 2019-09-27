@@ -62,7 +62,9 @@ function Form() {
 
   function onChangeMinTime(event) {
     const newValue = parseInt(event.target.value, 10);
-    if (newValue < 0) {
+    if (Number.isNaN(newValue)) {
+      setMinTime(minTime);
+    } else if (newValue < 0) {
       setMinTime(0);
     } else if (maxTime !== '' && newValue > maxTime) {
       setMinTime(maxTime);
@@ -75,7 +77,9 @@ function Form() {
 
   function onChangeMaxTime(event) {
     const newValue = parseInt(event.target.value, 10);
-    if (newValue > 10) {
+    if (Number.isNaN(newValue)) {
+      setMaxTime(maxTime);
+    } else if (newValue > 10) {
       setMaxTime(10);
     } else if (minTime !== '' && newValue < minTime) {
       setMaxTime(minTime);
