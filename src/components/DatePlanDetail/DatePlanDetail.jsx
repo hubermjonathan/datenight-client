@@ -76,10 +76,12 @@ function DatePlanDetail() {
       website: 'happylemon.com',
     },
   ];
-  const [dateplan] = useState(dateplanData);
+  const [items] = useState(dateplanData);
+  const [name] = useState('Test Date Plan');
+  const [rating] = useState(3);
 
   function createDateplanCards() {
-    return dateplan.map((item) => (
+    return items.map((item) => (
       <div className="detailCard">
         <div className="detailCardTitle">{item.name}</div>
         {item.rating
@@ -101,6 +103,8 @@ function DatePlanDetail() {
       <Nav />
 
       <div className="cards">
+        <div className="detailTitle">{name}</div>
+        <div className="detailRating">{rating} stars</div>
         {createDateplanCards()}
       </div>
     </div>

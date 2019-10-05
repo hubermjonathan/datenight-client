@@ -17,6 +17,17 @@
   padding: 2rem 0;
 }
 
+.detailTitle {
+  font-size: 4rem;
+  font-weight: $bold;
+}
+
+.detailRating {
+  font-size: 3rem;
+  font-weight: $bold;
+  margin: 0 0 2rem 0;
+}
+
 .detailCard {
   background-color: $text-1;
   width: 90%;
