@@ -6,7 +6,7 @@ import DatePlanDetail from './DatePlanDetail';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<DatePlanDetail />', () => {
-  const wrapper = Enzyme.shallow(<DatePlanDetail match={{ params: { id: 1 } }} />);
+  const wrapper = Enzyme.shallow(<DatePlanDetail match={{ params: { id: '1' } }} />);
 
   it('renders the dateplan title', () => {
     expect(wrapper.find('.detailTitle')).toHaveLength(1);
