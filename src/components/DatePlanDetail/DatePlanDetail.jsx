@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './DatePlanDetail.scss';
 import Nav from '../../common/Nav/Nav';
 
-function DatePlanDetail() {
+function DatePlanDetail(props) {
   const dateplanData = [
     {
       name: 'Happy Lemon',
@@ -76,9 +77,18 @@ function DatePlanDetail() {
       website: 'happylemon.com',
     },
   ];
-  const [items] = useState(dateplanData);
-  const [name] = useState('Test Date Plan');
-  const [rating] = useState(3);
+  const { match } = props;
+  const { params } = match;
+  const [items, setItems] = useState([]);
+  const [name, setName] = useState('Loading...');
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    console.log(params.id);
+    setItems(dateplanData);
+    setName('Test Date Plan');
+    setRating(3);
+  }, []);
 
   function createDateplanCards() {
     return items.map((item) => (
@@ -110,5 +120,13 @@ function DatePlanDetail() {
     </div>
   );
 }
+
+DatePlanDetail.propTypes = {
+  match: PropTypes.objectOf({
+    params: PropTypes.objectOf({
+      id: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default DatePlanDetail;
