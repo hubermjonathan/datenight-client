@@ -5,7 +5,7 @@ import './DatePlanDetail.scss';
 import Nav from '../../common/Nav/Nav';
 
 function DatePlanDetail(props) {
-  const dateplanData = [
+  const dateplanItems = [
     {
       name: 'Happy Lemon',
       address: '123 Happy St',
@@ -83,11 +83,20 @@ function DatePlanDetail(props) {
   const [name, setName] = useState('Loading...');
   const [rating, setRating] = useState(0);
 
+  function getDateplanData() {
+    return {
+      name: 'Test Date Plan',
+      rating: 2,
+      items: dateplanItems,
+    };
+  }
+
   useEffect(() => {
     console.log(params.id);
-    setItems(dateplanData);
-    setName('Test Date Plan');
-    setRating(3);
+    const dateplanData = getDateplanData();
+    setItems(dateplanData.items);
+    setName(dateplanData.name);
+    setRating(dateplanData.rating);
   }, []);
 
   function createDateplanCards() {
@@ -101,7 +110,7 @@ function DatePlanDetail(props) {
             </div>
           )}
         <div className="detailCardAddress">{item.address}</div>
-        {item.rating && <div className="detailCardPhone">{item.phone}</div>}
+        {item.phone && <div className="detailCardPhone">{item.phone}</div>}
         {item.website && <a className="detailCardWebsite" href={item.website}>visit their website</a>}
         {item.website === undefined && <div className="detailCardWebsite">no website</div>}
       </div>
