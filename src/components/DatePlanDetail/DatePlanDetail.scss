@@ -1,0 +1,48 @@
+@import "../../common/global";
+
+.detail {
+  display: grid;
+  grid-template:
+    "nav nav nav" 4rem
+    ". cards ." 93%
+    / 1fr 4fr 1fr;
+  height: auto;
+  background-color: $background;
+}
+
+.cards {
+  grid-area: cards;
+  justify-self: center;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.detailCard {
+  background-color: $text-1;
+  width: 90%;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  color: $text-2;
+  -moz-box-shadow: $box-shadow;
+  -webkit-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  -moz-border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
+
+.detailCard a {
+  color: $text-2;
+}
+
+.detailCard a:hover {
+  color: $primary;
+  text-decoration: none;
+}
+
+.detailCardTitle {
+  font-size: 2rem;
+  font-weight: $bold;
+}
