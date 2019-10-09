@@ -28,9 +28,13 @@ function Results(props) {
 
   return (
     <div className="results">
-      <Nav currentPage={currentPage} onClickMap={changeToMap} onClickList={changeToList} />
-
+      <Nav
+        currentPage={currentPage}
+        onClickMap={changeToMap}
+        onClickList={changeToList}
+      />
       {getPage()}
+
     </div>
   );
 }
