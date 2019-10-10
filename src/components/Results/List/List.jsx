@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './List.scss';
@@ -15,9 +16,7 @@ function List(props) {
             {results[i].rating
               && (
                 <div className="listCardRating">
-                  {results[i].rating}
-                  {' '}
-                  stars
+                  {results[i].rating} stars
                 </div>
               )}
             <div className="listCardAddress">{results[i].address}</div>
