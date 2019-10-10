@@ -11,6 +11,7 @@ function Form() {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [pins, setPins] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (document.getElementById('locationInput') === null) {
@@ -91,6 +92,8 @@ function Form() {
   }
 
   function handleSubmit() {
+    setIsLoading(true);
+
     const formData = {
       coordinates: [location.lat, location.lng],
       priceLevel: +priceRange,
@@ -111,6 +114,10 @@ function Form() {
         setPins([...pins, ...json]);
         setRedirect(true);
       });
+  }
+
+  function getLoader() {
+    return <img className="loader" src="loader.svg" alt="loading..." />;
   }
 
   if (redirect) {
@@ -178,7 +185,8 @@ function Form() {
           </div>
         </div>
 
-        <button type="button" className="submitButton" onClick={handleSubmit} disabled={buttonDisabled}>find dates</button>
+        {!isLoading && <button type="button" className="submitButton" onClick={handleSubmit} disabled={buttonDisabled}>find dates</button>}
+        {isLoading && getLoader()}
       </div>
     </div>
   );
