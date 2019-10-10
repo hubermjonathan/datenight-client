@@ -12,6 +12,40 @@ function Map(props) {
       disableDefaultUI: true,
     });
 
+    const addLocationControl = document.createElement('div');
+    addLocationControl.style.cursor = 'pointer';
+    addLocationControl.style.backgroundColor = '#ffffff';
+    addLocationControl.style.margin = '2rem';
+    addLocationControl.style.color = '#006494';
+    addLocationControl.style.fontSize = '1.5rem';
+    addLocationControl.style.textAlign = 'center';
+    addLocationControl.style.boxShadow = '0px 5px 5px 0px rgba(0, 0, 0, 0.16)';
+    addLocationControl.style.borderRadius = '15px';
+    addLocationControl.style.padding = '1rem';
+    addLocationControl.title = 'add a location to the map';
+    addLocationControl.innerHTML = 'add a location to the map';
+    addLocationControl.addEventListener('click', () => {
+      addLocationControl.style.opacity = '0.7';
+      addLocationControl.style.cursor = 'default';
+
+      const listener = map.addListener('click', (e) => {
+        if (e.placeId) {
+          e.stop();
+
+          // eslint-disable-next-line no-alert
+          // eslint-disable-next-line no-restricted-globals
+          if (confirm('Are you sure you want to add this place?')) {
+            console.log(e.placeId);
+
+            addLocationControl.style.opacity = '1';
+            addLocationControl.style.cursor = 'pointer';
+            window.google.maps.event.removeListener(listener);
+          }
+        }
+      });
+    });
+    map.controls[window.google.maps.ControlPosition.RIGHT_TOP].push(addLocationControl);
+
     for (let i = 0; i < pins.length; i += 1) {
       const marker = new window.google.maps.Marker({
         position: pins[i].location,
