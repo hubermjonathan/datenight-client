@@ -8,9 +8,10 @@ function displayHours(hours) {
   if (typeof hours === 'undefined') {
     return '\n Hours not available \n';
   }
-  const today = new Date();
-  const hour = today.getHours();
-  return hour;
+  const date = new Date();
+  const today = date.getDay() - 1;
+  const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 1)}`;
+  return h;
 }
 
 function List(props) {
