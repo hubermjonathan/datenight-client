@@ -2,6 +2,17 @@
 import React from 'react';
 import './List.scss';
 
+const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
+
+function displayHours(hours) {
+  if (typeof hours === 'undefined') {
+    return '\n Hours not available \n';
+  }
+  const today = new Date();
+  const hour = today.getHours();
+  return hour;
+}
+
 function List(props) {
   const { results } = props;
 
@@ -9,9 +20,16 @@ function List(props) {
     const createdCards = [];
     if (results) {
       for (let i = 0; i < results.length; i += 1) {
+        console.log(results);
         createdCards.push(
           <div className="listCard" key={`listCard${i}`}>
-            <div className="listCardTitle">{results[i].name}</div>
+            <div className="listCardTitle">
+              {results[i].name}
+              &nbsp;
+              (
+              {priceLevels[results[i].priceLevel]}
+              )
+            </div>
             {results[i].rating
               && (
                 <div className="listCardRating">
@@ -24,6 +42,7 @@ function List(props) {
             {results[i].rating && <div className="listCardPhone">{results[i].phone}</div>}
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
+            <div>{displayHours(results[i].openHours)}</div>
           </div>,
         );
       }
