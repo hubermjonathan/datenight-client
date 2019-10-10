@@ -81,7 +81,7 @@ function DatePlanDetail(props) {
   const { params } = match;
   const [items, setItems] = useState([]);
   const [name, setName] = useState('Loading...');
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(null);
 
   function getDateplanData() {
     return {
@@ -123,7 +123,8 @@ function DatePlanDetail(props) {
 
       <div className="cards">
         <div className="detailTitle">{name}</div>
-        <div className="detailRating">{rating} stars</div>
+        {rating !== null && <div className="detailRating">{rating} stars</div>}
+        {rating === null && <div className="detailRating">not rated</div>}
         {createDateplanCards()}
       </div>
     </div>
