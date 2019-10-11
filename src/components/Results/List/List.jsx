@@ -58,7 +58,7 @@ function List(props) {
   function onchangeSort(event) {
     setSortChange(event.target.value);
     const newCards = cards.slice(0);
-    if (sortChange === 'rating') {
+    if (sortChange === 'price') {
       newCards.sort((e1, e2) => {
         if (!e1.props.children[1] && !e2.props.children[1]) {
           return -1;
@@ -80,7 +80,28 @@ function List(props) {
         return 0;
       });
     }
-    if (sortChange === 'price') { newCards.sort(); }
+    if (sortChange === 'rating') {
+      newCards.sort((e1, e2) => {
+        if (!e1.props.children[0].props.children[2] && !e2.props.children[0].props.children[2]) {
+          return -1;
+        }
+        if (!e1.props.children[0].props.children[2]) {
+          return 1;
+        }
+        if (!e2.props.children[0].props.children[2]) {
+          return -1;
+        }
+        const r1 = e1.props.children[0].props.children[2].length;
+        const r2 = e2.props.children[0].props.children[2].length;
+        if (r1 > r2) {
+          return -1;
+        }
+        if (r1 < r2) {
+          return 1;
+        }
+        return 0;
+      });
+    }
     setCards(newCards);
   }
 
