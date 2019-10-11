@@ -4,32 +4,29 @@ import './List.scss';
 
 const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
 
-function displayHours(hours) {
-  if (typeof hours === 'undefined') {
-    return '\n Hours not available \n';
-  }
-  const date = new Date();
-  const today = date.getDay() - 1;
-  const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 1)}`;
-  return h;
-}
-
 function List(props) {
   const { results } = props;
+  
+  function displayHours(hours) {
+    if (typeof hours === 'undefined') {
+      return '\n Hours not available \n';
+    }
+    const date = new Date();
+    const today = date.getDay() - 1;
+    const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 1)}`;
+    return h;
+  }
 
   function getCards() {
     const createdCards = [];
     if (results) {
       for (let i = 0; i < results.length; i += 1) {
-        console.log(results);
         createdCards.push(
           <div className="listCard" key={`listCard${i}`}>
             <div className="listCardTitle">
               {results[i].name}
               &nbsp;
-              (
               {priceLevels[results[i].priceLevel]}
-              )
             </div>
             {results[i].rating
               && (
