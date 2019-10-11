@@ -85,17 +85,19 @@ function DatePlanDetail(props) {
 
   function getDateplanData() {
     return {
-      name: 'Test Date Plan',
+      user: 'mock',
+      date: 'Test Date Plan',
       rating: 2,
-      items: dateplanItems,
+      dateid: '123',
+      activities: dateplanItems,
     };
   }
 
   useEffect(() => {
     console.log(params.id);
     const dateplanData = getDateplanData();
-    setItems(dateplanData.items);
-    setName(dateplanData.name);
+    setItems(dateplanData.activities);
+    setName(dateplanData.date);
     setRating(dateplanData.rating);
   }, []);
 
