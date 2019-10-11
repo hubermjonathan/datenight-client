@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -46,9 +47,7 @@ function Nav(props) {
 
         {isAuthenticated && (
           <button className="button" type="button" onClick={() => logout()}>
-            Hello,
-            {' '}
-            {user.name}
+            Hello, {user.name}
             <i className="fas fa-user-circle" />
           </button>
         )}

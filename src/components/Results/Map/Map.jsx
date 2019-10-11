@@ -42,6 +42,27 @@ function Map(props) {
       if (pins[i].website) {
         popupContentString += `<a href="${pins[i].website}">visit their website</a>`;
       }
+      if (pins[i].movieTimes) {
+        popupContentString += '<div></br>movies showing:</div>';
+
+        const movies = Object.keys(pins[i].movieTimes);
+        const times = [];
+        for (let j = 0; j < movies.length; j += 1) {
+          const timesForJ = Object.values(pins[i].movieTimes)[j];
+          const timesForJDecoded = timesForJ.map((time) => {
+            const date = new Date(time);
+            const hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+            const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+            const ampm = date.getHours() > 12 ? 'pm' : 'am';
+            return `${hours}:${minutes}${ampm}`;
+          });
+          times.push(timesForJDecoded.join(', '));
+        }
+
+        for (let j = 0; j < movies.length; j += 1) {
+          popupContentString += `<div>${movies[j]}: ${times[j]}</div>`;
+        }
+      }
       popupContentString += '</div>';
 
       const popup = new window.google.maps.InfoWindow({
