@@ -40,20 +40,29 @@ function List(props) {
   const [cards, setCards] = useState(getCards());
 
   function onchangeSort(event) {
-    console.log('lmao');
     setSortChange(event.target.value);
     const newCards = cards.slice(0);
     if (sortChange === 'rating') {
-      console.log(newCards);
-      // newCards.sort((e1, e2) => {
-      //   if (e1.) {
-      //     return -1;
-      //   }
-      //   if () {
-      //     return 1;
-      //   }
-      //   return 0;
-      // });
+      newCards.sort((e1, e2) => {
+        if (!e1.props.children[1] && !e2.props.children[1]) {
+          return -1;
+        }
+        if (!e1.props.children[1]) {
+          return 1;
+        }
+        if (!e2.props.children[1]) {
+          return -1;
+        }
+        const r1 = e1.props.children[1].props.children[0];
+        const r2 = e2.props.children[1].props.children[0];
+        if (r1 > r2) {
+          return -1;
+        }
+        if (r1 < r2) {
+          return 1;
+        }
+        return 0;
+      });
     }
     if (sortChange === 'price') { newCards.sort(); }
     setCards(newCards);
