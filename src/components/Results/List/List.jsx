@@ -7,7 +7,7 @@ const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
 
 function List(props) {
   const { results } = props;
-  
+
   function displayHours(hours) {
     if (typeof hours === 'undefined') {
       return '\n Hours not available \n';
