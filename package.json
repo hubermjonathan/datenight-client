@@ -4,7 +4,7 @@
   "description": "datenight is the search engine for finding the perfect date ideas in your price range and area",
   "main": "src/App.jsx",
   "scripts": {
-    "lint": "eslint src/*",
+    "lint": "eslint .",
     "test": "jest --watch",
     "clean": "rm -f public/bundle.js && rm package-lock.json && rm -rf node_modules",
     "dev": "webpack-dev-server",
