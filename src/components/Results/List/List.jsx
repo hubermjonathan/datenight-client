@@ -15,7 +15,9 @@ function List(props) {
     }
     const date = new Date();
     const today = date.getDay() - 1;
-    const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 1)}`;
+    console.log(hours[today]);
+    const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 2)}`;
+    console.log(h);
     return h;
   }
 
@@ -40,7 +42,7 @@ function List(props) {
             {results[i].rating && <div className="listCardPhone">{results[i].phone}</div>}
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
-            <div>{displayHours(results[i].openHours)}</div>
+            <div className="listCardHours">{displayHours(results[i].openHours)}</div>
           </div>,
         );
       }
