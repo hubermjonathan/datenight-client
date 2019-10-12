@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './List.scss';
 
-const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
+const priceLevels = ['', '$', '$$', '$$$', '$$$$'];
 
 function List(props) {
   const { results } = props;
@@ -15,10 +15,12 @@ function List(props) {
     }
     const date = new Date();
     const today = date.getDay() - 1;
-    console.log(hours[today]);
     const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 2)}`;
-    console.log(h);
     return h;
+  }
+
+  function dateplanClick(e) {
+    console.log(e);
   }
 
   function getCards() {
@@ -43,6 +45,7 @@ function List(props) {
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
+            <button key={i} type="button" className="btn btn-primary" onClick={dateplanClick}>Add to Dateplan</button>
           </div>,
         );
       }
