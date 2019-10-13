@@ -1,31 +1,20 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './DatePlanDetail.scss';
 import Nav from '../../common/Nav/Nav';
 
 function DatePlanDetail(props) {
-  const { match } = props;
-  const { params } = match;
-  const [items, setItems] = useState();
-  const [name, setName] = useState();
-  const [rating, setRating] = useState();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`https://datenight-api-251515.appspot.com/plan/${params.id}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setName(json.date);
-        setRating(json.rating);
-        setItems(json.activities);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    loading,
+    name,
+    rating,
+    items,
+  } = props;
 
   function createDateplanCards() {
     return items.map((item) => (
-      <div className="detailCard">
+      <div className="detailCard" key={item.placeid}>
         <div className="detailCardTitle">{item.name}</div>
         {item.rating
           && (
@@ -58,12 +47,25 @@ function DatePlanDetail(props) {
   );
 }
 
+DatePlanDetail.defaultProps = {
+  rating: null,
+};
+
 DatePlanDetail.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
+  loading: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  rating: PropTypes.number,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    long: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    website: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    placeid: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default DatePlanDetail;

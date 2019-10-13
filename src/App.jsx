@@ -10,7 +10,7 @@ import config from './auth-config.json';
 import Landing from './components/Landing/Landing';
 import Form from './components/Form/Form';
 import Results from './components/Results/Results';
-import DatePlanDetail from './components/DatePlanDetail/DatePlanDetail';
+import DatePlanDetailContainer from './components/DatePlanDetail/DatePlanDetailContainer';
 
 const onRedirectCallback = (appState) => {
   window.history.replaceState(
@@ -27,7 +27,7 @@ const App = () => (
     <Route path="/" exact component={Landing} />
     <Route path="/form" exact component={Form} />
     <Route path="/results" exact component={Results} />
-    <Route path="/plan/:id" component={DatePlanDetail} />
+    <Route path="/plan/:id" component={DatePlanDetailContainer} />
   </Router>
 );
 

@@ -11,6 +11,34 @@ jest.mock('../../common/authHook');
 const loginSpy = sinon.spy();
 const logoutSpy = sinon.spy();
 
+const loading = false;
+const name = '--TEST PLAN--';
+const rating = null;
+const items = [
+  {
+    name: '--TEST ACTIVITY--',
+    long: 0,
+    lat: 0,
+    address: '--TEST ADDR--',
+    price: 0,
+    website: 'www.google.com',
+    phone: '123456789',
+    placeid: '--TEST1--',
+    rating: 1,
+  },
+  {
+    name: '--TEST ACTIVITY--',
+    long: 0,
+    lat: 0,
+    address: '--TEST ADDR--',
+    price: 0,
+    website: 'www.google.com',
+    phone: '123456789',
+    placeid: '--TEST2--',
+    rating: 1,
+  },
+];
+
 describe('<DatePlanDetail />', () => {
   beforeEach(() => {
     useAuth0.mockReturnValue({
@@ -27,7 +55,7 @@ describe('<DatePlanDetail />', () => {
   it('renders the dateplan title', () => {
     const wrapper = Enzyme.mount(
       <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
-        <DatePlanDetail match={{ params: { id: '04fd2d02-eddc-11e9-833f-02c9b3b50bb8' } }} />
+        <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
     expect(wrapper.find('.detailTitle')).toHaveLength(1);
@@ -37,7 +65,7 @@ describe('<DatePlanDetail />', () => {
   it('renders the dateplan rating with a null rating', () => {
     const wrapper = Enzyme.mount(
       <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
-        <DatePlanDetail match={{ params: { id: '04fd2d02-eddc-11e9-833f-02c9b3b50bb8' } }} />
+        <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
     expect(wrapper.find('.detailRating')).toHaveLength(1);
@@ -47,7 +75,7 @@ describe('<DatePlanDetail />', () => {
   it('renders the dateplan item cards', () => {
     const wrapper = Enzyme.mount(
       <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
-        <DatePlanDetail match={{ params: { id: '04fd2d02-eddc-11e9-833f-02c9b3b50bb8' } }} />
+        <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
     expect(wrapper.find('.detailCard')).toHaveLength(2);
@@ -56,19 +84,12 @@ describe('<DatePlanDetail />', () => {
   it('renders one of the cards correctly', () => {
     const wrapper = Enzyme.mount(
       <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
-        <DatePlanDetail match={{ params: { id: '04fd2d02-eddc-11e9-833f-02c9b3b50bb8' } }} />
+        <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
-    expect(wrapper.find('.detailCard')).toHaveLength(1);
     expect(wrapper.find('.detailCardTitle').at(0).text()).toMatch('--TEST ACTIVITY--');
-
-    expect(wrapper.find('.detailCard')).toHaveLength(1);
     expect(wrapper.find('.detailCardRating').at(0).text()).toMatch('1 stars');
-
-    expect(wrapper.find('.detailCard')).toHaveLength(1);
-    expect(wrapper.find('.detailCardTitle').at(0).text()).toMatch('123456789');
-
-    expect(wrapper.find('.detailCard')).toHaveLength(1);
-    expect(wrapper.find('.detailCardWebsite').at(0).text()).toMatch('www.google.com');
+    expect(wrapper.find('.detailCardPhone').at(0).text()).toMatch('123456789');
+    expect(wrapper.find('.detailCardWebsite').at(0).text()).toMatch('visit their website');
   });
 });
