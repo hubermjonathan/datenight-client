@@ -5,100 +5,22 @@ import './DatePlanDetail.scss';
 import Nav from '../../common/Nav/Nav';
 
 function DatePlanDetail(props) {
-  const dateplanItems = [
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-    {
-      name: 'Happy Lemon',
-      address: '123 Happy St',
-      phone: '(123) 456-7890',
-      rating: 4.4,
-      website: 'happylemon.com',
-    },
-  ];
   const { match } = props;
   const { params } = match;
-  const [items, setItems] = useState([]);
-  const [name, setName] = useState('Loading...');
-  const [rating, setRating] = useState(null);
-
-  function getDateplanData() {
-    return {
-      user: 'mock',
-      date: 'Test Date Plan',
-      rating: 2,
-      dateid: '123',
-      activities: dateplanItems,
-    };
-  }
+  const [items, setItems] = useState();
+  const [name, setName] = useState();
+  const [rating, setRating] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(params.id);
-    const dateplanData = getDateplanData();
-    setItems(dateplanData.activities);
-    setName(dateplanData.date);
-    setRating(dateplanData.rating);
+    fetch(`https://datenight-api-251515.appspot.com/plan/${params.id}`)
+      .then((res) => res.json())
+      .then((json) => {
+        setName(json.date);
+        setRating(json.rating);
+        setItems(json.activities);
+        setLoading(false);
+      });
   }, []);
 
   function createDateplanCards() {
@@ -123,12 +45,15 @@ function DatePlanDetail(props) {
     <div className="detail">
       <Nav />
 
-      <div className="cards">
-        <div className="detailTitle">{name}</div>
-        {rating !== null && <div className="detailRating">{rating} stars</div>}
-        {rating === null && <div className="detailRating">not rated</div>}
-        {createDateplanCards()}
-      </div>
+      {loading && <div />}
+      {!loading && (
+        <div className="cards">
+          <div className="detailTitle">{name}</div>
+          {rating !== null && <div className="detailRating">{rating} stars</div>}
+          {rating === null && <div className="detailRating">not rated</div>}
+          {createDateplanCards()}
+        </div>
+      )}
     </div>
   );
 }
