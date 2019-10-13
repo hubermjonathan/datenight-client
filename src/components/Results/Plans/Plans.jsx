@@ -31,25 +31,33 @@ function Plans(props) {
     for (let i = 0; i < mock.length; i += 1) {
       cards.push(
         <div className="listCard" key={`listCard${i}`}>
-          <div className="listCardTitle">
+          <div className="cardTitle">
             {mock[i].date}
             &nbsp;
           </div>
           {mock[i].rating
             && (
-              <div className="listCardRating">
+              <div className="cardRate">
                 {mock[i].rating} stars
               </div>
             )}
-          Rate this plan: {' '}
-          <select className="rate">
-            <option value="" hidden> </option>
-            <option value="rating">1 stars</option>
-            <option value="rating">2 stars</option>
-            <option value="rating">3 stars</option>
-            <option value="rating">4 stars</option>
-            <option value="rating">5 stars</option>
-          </select>
+          <div className="cardRating">
+            Rate this plan: {' '}
+            <select className="selectRate">
+              <option value="" hidden> </option>
+              <option value="rating">1 stars</option>
+              <option value="rating">2 stars</option>
+              <option value="rating">3 stars</option>
+              <option value="rating">4 stars</option>
+              <option value="rating">5 stars</option>
+            </select>
+          </div>
+          <button className="cardViewBtn" type="button">
+            View
+          </button>
+          <button className="cardDeleteBtn" type="button">
+            Delete
+          </button>
         </div>,
       );
     }

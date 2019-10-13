@@ -15,6 +15,36 @@
   font-weight: $bold;
 }
 
+.cardTitle {
+  grid-area: 1 / 1 / 2 / 6;
+  font-size: 2rem;
+  font-weight: $bold;
+}
+
+.cardRate{
+  grid-area: 2 / 1 / 4 / 6;
+}
+
+.cardRating{
+  grid-area: 3 / 1 / 5 / 6;
+}
+
+.cardViewBtn{
+  color: $text-2;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+  grid-area: 5 / 1 / 6 / 2;
+}
+
+.cardDeleteBtn{
+  color: red;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  grid-area: 5 / 5 / 6 / 6;
+}
+
+
+
 .listCard {
   font-size: 1.5rem;
   height: 20rem;
@@ -27,6 +57,11 @@
   -moz-border-radius: $border-radius;
   -webkit-border-radius: $border-radius;
   border-radius: $border-radius;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
 .listCard a {
@@ -38,7 +73,3 @@
   text-decoration: none;
 }
 
-.listCardTitle {
-  font-size: 2rem;
-  font-weight: $bold;
-}
