@@ -8,7 +8,9 @@ import './Nav.scss';
 import { useAuth0 } from '../authHook';
 
 function Nav(props) {
-  const { currentPage, onClickMap, onClickList } = props;
+  const {
+    currentPage, onClickMap, onClickList, onClickPlans,
+  } = props;
   const {
     isAuthenticated,
     loginWithRedirect,
@@ -17,6 +19,7 @@ function Nav(props) {
   } = useAuth0();
   const mapTabClassName = currentPage === 'map' ? 'tab active' : 'tab';
   const listTabClassName = currentPage === 'list' ? 'tab active' : 'tab';
+  const plansTabClassName = currentPage === 'plans' ? 'tab active' : 'tab';
 
   return (
     <div className="nav">
@@ -28,12 +31,21 @@ function Nav(props) {
         <div className="tabs">
           <div className={mapTabClassName}>Map</div>
           <div onClick={onClickList} className={listTabClassName}>List</div>
+          <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>
         </div>
       )}
       {currentPage === 'list' && (
         <div className="tabs">
           <div onClick={onClickMap} className={mapTabClassName}>Map</div>
           <div className={listTabClassName}>List</div>
+          <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>
+        </div>
+      )}
+      {currentPage === 'plans' && (
+        <div className="tabs">
+          <div onClick={onClickMap} className={mapTabClassName}>Map</div>
+          <div onClick={onClickList} className={listTabClassName}>List</div>
+          <div className={plansTabClassName}>Plans</div>
         </div>
       )}
 
@@ -63,6 +75,7 @@ Nav.propTypes = {
   currentPage: PropTypes.string.isRequired,
   onClickMap: PropTypes.func.isRequired,
   onClickList: PropTypes.func.isRequired,
+  onClickPlans: PropTypes.func.isRequired,
 };
 
 export default Nav;
