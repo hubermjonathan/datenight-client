@@ -15,6 +15,16 @@ describe('<List />', () => {
       name: 'Happy Lemon',
       website: 'postmates.com',
       rating: '4.4',
+      priceLevel: 2,
+      openHours: [
+        'Monday: HOURS',
+        'Tuesday: HOURS',
+        'Wednesday: HOURS',
+        'Thursday: HOURS',
+        'Friday: HOURS',
+        'Saturday: HOURS',
+        'Sunday: HOURS',
+      ],
     },
     {
       location: {
@@ -71,5 +81,18 @@ describe('<List />', () => {
 
   it('renders a message for no website', () => {
     expect(wrapper.find('.listCardWebsite').at(1).text()).toMatch('no website');
+  });
+
+  it('renders the card price levels', () => {
+    expect(wrapper.find('.listCardTitle').at(0).text()).toContain('$$');
+  });
+
+  it('renders the card hours', () => {
+    expect(wrapper.find('.listCardHours')).toHaveLength(results.length);
+    expect(wrapper.find('.listCardHours').at(0).text()).toContain('Today: HOURS');
+  });
+
+  it('renders a message for no hours', () => {
+    expect(wrapper.find('.listCardHours').at(1).text()).toContain('\n Hours not available \n');
   });
 });

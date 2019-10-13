@@ -31,6 +31,7 @@ function Results(props) {
       <NavWithTabs currentPage={currentPage} onClickMap={changeToMap} onClickList={changeToList} />
 
       {getPage()}
+
     </div>
   );
 }
