@@ -34,7 +34,6 @@ function Results(props) {
         onClickList={changeToList}
       />
       {getPage()}
-
     </div>
   );
 }
