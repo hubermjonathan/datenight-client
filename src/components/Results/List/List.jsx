@@ -39,7 +39,7 @@ function List(props) {
                 </div>
               )}
             <div className="listCardAddress">{results[i].address}</div>
-            {results[i].rating && <div className="listCardPhone">{results[i].phone}</div>}
+            {results[i].phone && <div className="listCardPhone">{results[i].phone}</div>}
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
