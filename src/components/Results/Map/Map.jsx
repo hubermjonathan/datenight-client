@@ -35,12 +35,11 @@ function Map(props) {
           // eslint-disable-next-line no-alert
           // eslint-disable-next-line no-restricted-globals
           if (confirm('Are you sure you want to add this place?')) {
-            console.log(e);
             const newLocation = {
-              id: e.placeId,
-              lat: e.latLng.lat(),
-              lng: e.latLng.lng(),
+              placeid: e.placeId,
             };
+
+            console.log(newLocation);
 
             fetch('https://datenight-api-251515.appspot.com/createVenue', {
               method: 'POST',
@@ -48,11 +47,7 @@ function Map(props) {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(newLocation),
-            })
-              .then((res) => res.json())
-              .then((json) => {
-                console.log(json);
-              });
+            });
 
             addLocationControl.style.opacity = '1';
             addLocationControl.style.cursor = 'pointer';
