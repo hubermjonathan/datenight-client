@@ -68,11 +68,10 @@ function Plans() {
         .then((res) => res.json())
         // eslint-disable-next-line consistent-return
         .then((json) => {
-          console.log(json);
           const plansCards = [];
           for (let i = 0; i < json.plans.length; i += 1) {
             plansCards.push(
-              <div className="listCard" key={`listCard${i}`}>
+              <div className="plansCard" key={`plansCard${i}`}>
                 <div className="cardTitle">
                   {json.plans[i].date}
                   &nbsp;
