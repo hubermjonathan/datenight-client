@@ -37,24 +37,6 @@ function List(props) {
   const toggleModal = () => setModal(!modal);
   const toggleViewPlan = () => setViewPlan(!viewPlan);
 
-  function deleteActivity(name) {
-    const newCurrentActivities = [];
-    const newActivities = [];
-
-    for (let x = 0; x < activities.length; x += 1) {
-      if (name !== activities[x].name) {
-        newCurrentActivities.push(
-          <li>{activities[x].name} &nbsp;
-            <button type="button" className="btn btn-danger" onClick={() => { deleteActivity(activities[x].name); }}>X</button>
-          </li>,
-        );
-        newActivities.push(activities[x]);
-      }
-    }
-    addActivities([activities, newActivities]);
-    addToActivities([currentActivities, newCurrentActivities]);
-  }
-
   function addToDateplan() {
     toggleModal();
     // perform sql insert here
@@ -71,7 +53,6 @@ function List(props) {
     };
     const li = (
       <li>{results[resultIndex].name} &nbsp;
-        <button type="button" className="btn btn-danger" onClick={() => { deleteActivity(results[resultIndex].name); }}>X</button>
       </li>
     );
     addToActivities([...currentActivities, li]);
