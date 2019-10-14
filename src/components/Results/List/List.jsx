@@ -110,7 +110,7 @@ function List(props) {
   return (
     <div>
       <div className="utilityBar">
-        <button className="button" type="button" disabled>
+        <option className="button" type="button" disabled>
           Sort By:
           &nbsp;
           <select className="sort" onChange={onchangeSort} value={sortChange}>
@@ -118,7 +118,7 @@ function List(props) {
             <option value="price">Price</option>
             <option value="rating">Rating</option>
           </select>
-        </button>
+        </option>
       </div>
 
       <div className="cardsContainer">

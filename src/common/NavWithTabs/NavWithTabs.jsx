@@ -19,7 +19,7 @@ function NavWithTabs(props) {
   const listTabClassName = currentPage === 'list' ? 'tab active' : 'tab';
 
   return (
-    <div className="nav">
+    <div className="navWithTabs">
       <div className="logo">
         <Link to="/">DateNight</Link>
       </div>
