@@ -1,14 +1,13 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Plans.scss';
 
-function Plans(props) {
-  const { results } = props;
+function Plans() {
+  const [plans, setPlans] = useState();
 
   async function handleRate(event, id) {
-    console.log('lmao');
     fetch('https://datenight-api-251515.appspot.com/rate', {
       method: 'POST',
       headers: {
@@ -18,7 +17,7 @@ function Plans(props) {
     });
   }
 
-  async function handleDelete(id) {
+  async function handleDelete(event, id) {
     fetch('https://datenight-api-251515.appspot.com/delete', {
       method: 'POST',
       headers: {
@@ -28,24 +27,21 @@ function Plans(props) {
     });
   }
 
-
-  function getPlans() {
-    const plans = [];
-    if (!results) return plans;
+  useEffect(() => {
     const mock = [{
-      date: 'Cool date',
+      date: 'cool date',
       user: '1234',
       id: 'abc',
       rating: '3',
     },
     {
-      date: 'Cool date 2',
+      date: 'cool date 2',
       user: '1235',
       id: 'abd',
       rating: '5',
     },
     {
-      date: 'Cool date 3',
+      date: 'cool date 3',
       user: '1236',
       id: 'abz',
       rating: '2',
@@ -54,22 +50,24 @@ function Plans(props) {
     for (let i = 0; i < 25; i += 1) {
       mock.push(
         {
-          date: 'Cool date ',
+          date: 'cool date ',
           user: '1236',
           id: 'abz',
           rating: `${(i % 4) + 1}`,
         },
       );
     }
+
+    const plansCards = [];
     for (let i = 0; i < mock.length; i += 1) {
-      plans.push(
+      plansCards.push(
         <div className="listCard" key={`listCard${i}`}>
           <div className="cardTitle">
             {mock[i].date}
             &nbsp;
           </div>
           <div className="cardRating">
-            Rating: {' '}
+            Rating: &nbsp;
             <button className="button" type="button" disabled>
               <select className="selectRate" onChange={(e) => handleRate(e, mock[i].id)}>
                 <option value={`${mock[i].rating} stars`} selected disabled hidden>{`${mock[i].rating} stars`}</option>
@@ -94,14 +92,13 @@ function Plans(props) {
         </div>,
       );
     }
-    if (plans.length === 0) {
-      return <div className="emptyMessage">You have no saved date plans.</div>;
+    if (plansCards.length === 0) {
+      return <div className="emptyMessage">You have no saved date plansCards.</div>;
     }
-    return plans;
-  }
 
-
-  const [plans] = useState(getPlans());
+    setPlans(plansCards);
+    return plansCards;
+  }, []);
 
   return (
     <div>
