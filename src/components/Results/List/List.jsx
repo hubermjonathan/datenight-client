@@ -7,7 +7,10 @@ const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
 
 function List(props) {
   const { results } = props;
+<<<<<<< HEAD
+=======
   const [sortChange, setSortChange] = useState('');
+>>>>>>> c947aca9ec4ece36bd2df22205ed597c52dbb47d
 
   function displayHours(hours) {
     if (typeof hours === 'undefined') {
