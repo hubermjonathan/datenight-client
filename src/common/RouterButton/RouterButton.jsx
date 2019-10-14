@@ -9,7 +9,7 @@ function RouterButton(props) {
   if (disabled) {
     return (
       <div className="routerButtonDisabled">
-        { children }
+        {children}
       </div>
     );
   }
@@ -17,7 +17,7 @@ function RouterButton(props) {
   return (
     <Link to={linkTo}>
       <div className="routerButton">
-        { children }
+        {children}
       </div>
     </Link>
   );

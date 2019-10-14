@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import './Map.scss';
@@ -32,14 +34,10 @@ function Map(props) {
         if (e.placeId) {
           e.stop();
 
-          // eslint-disable-next-line no-alert
-          // eslint-disable-next-line no-restricted-globals
           if (confirm('Are you sure you want to add this place?')) {
             const newLocation = {
               placeid: e.placeId,
             };
-
-            console.log(newLocation);
 
             fetch('https://datenight-api-251515.appspot.com/createVenue', {
               method: 'POST',
