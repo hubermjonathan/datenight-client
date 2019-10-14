@@ -9,17 +9,13 @@ function Plans() {
   const [plans, setPlans] = useState();
   const { getTokenSilently } = useAuth0();
 
-  async function getToken() {
-    const token = await getTokenSilently();
-    return token;
-  }
-
   async function handleRate(event, id) {
-    const token = getToken();
+    const token = await getTokenSilently();
     const body = {
       dateid: id,
       rating: +event,
     };
+    console.log(body);
     fetch('https://datenight-api-251515.appspot.com/rate', {
       method: 'POST',
       headers: {
@@ -42,7 +38,7 @@ function Plans() {
   }
 
   async function handleDelete(event, id) {
-    const token = getToken();
+    const token = await getTokenSilently();
     const body = {
       dateid: id,
     };
@@ -68,6 +64,7 @@ function Plans() {
         .then((res) => res.json())
         // eslint-disable-next-line consistent-return
         .then((json) => {
+          console.log(json);
           const plansCards = [];
           for (let i = 0; i < json.plans.length; i += 1) {
             plansCards.push(
@@ -79,8 +76,8 @@ function Plans() {
                 <div className="cardRating">
                   Rating: &nbsp;
                   <button className="button" type="button" disabled>
-                    <select className="selectRate" onChange={(e) => handleRate(e.target.value, json.plans[i].id)}>
-                      <option value={`${json.plans[i].rating} stars`} selected disabled hidden>{`${json.plans[i].rating} stars`}</option>
+                    <select className="selectRate" onChange={(e) => handleRate(e.target.value, json.plans[i].dateid)}>
+                      <option value={`${json.plans[i].rating} stars`} selected disabled hidden>{`${json.plans[i].daterating} stars`}</option>
                       <option value="1">1 stars</option>
                       <option value="2">2 stars</option>
                       <option value="3">3 stars</option>
@@ -89,18 +86,18 @@ function Plans() {
                     </select>
                   </button>
                 </div>
-                <Link className="cardViewBtn" to={`/plan?id=${json.plans[i].id}`}>
+                <Link className="cardViewBtn" to={`/plan?id=${json.plans[i].dateid}`}>
                   <button className="cardViewBtn" type="button">
                     Details
                   </button>
                 </Link>
                 <a className="cardShareBtn" href>
-                  <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, json.plans[i].id)}>
+                  <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, json.plans[i].dateid)}>
                     Share
                   </button>
                 </a>
                 <a className="cardDeleteBtn" href>
-                  <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, json.plans[i].id)}>
+                  <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, json.plans[i].dateid)}>
                     Delete
                   </button>
                 </a>
