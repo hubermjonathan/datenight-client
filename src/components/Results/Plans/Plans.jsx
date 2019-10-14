@@ -27,6 +27,7 @@ function Plans() {
     });
   }
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     const mock = [{
       date: 'cool date',
@@ -97,7 +98,6 @@ function Plans() {
     }
 
     setPlans(plansCards);
-    return plansCards;
   }, []);
 
   return (
