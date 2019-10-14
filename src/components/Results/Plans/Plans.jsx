@@ -3,17 +3,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Plans.scss';
+import { useAuth0 } from '../../../common/authHook';
 
 function Plans() {
   const [plans, setPlans] = useState();
+  const { getTokenSilently } = useAuth0();
+
+  async function getToken() {
+    const token = await getTokenSilently();
+    return token;
+  }
 
   async function handleRate(event, id) {
+    const token = getToken();
+    const body = {
+      dateid: id,
+      rating: +event,
+    };
     fetch('https://datenight-api-251515.appspot.com/rate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ dateid: id, rating: event.target.value }),
+      body: JSON.stringify(body),
     });
   }
 
@@ -29,91 +42,81 @@ function Plans() {
   }
 
   async function handleDelete(event, id) {
+    const token = getToken();
+    const body = {
+      dateid: id,
+    };
     fetch('https://datenight-api-251515.appspot.com/delete', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ dateid: id }),
+      body: JSON.stringify(body),
     });
   }
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    const mock = [{
-      date: 'cool date',
-      user: '1234',
-      id: 'abc',
-      rating: '3',
-    },
-    {
-      date: 'cool date 2',
-      user: '1235',
-      id: 'abd',
-      rating: '5',
-    },
-    {
-      date: 'cool date 3',
-      user: '1236',
-      id: 'abz',
-      rating: '2',
-    },
-    ];
-    for (let i = 0; i < 25; i += 1) {
-      mock.push(
-        {
-          date: 'cool date ',
-          user: '1236',
-          id: 'abz',
-          rating: `${(i % 4) + 1}`,
+    async function getData() {
+      const token = await getTokenSilently();
+      fetch('https://datenight-api-251515.appspot.com/plans', {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      })
+        .then((res) => res.json())
+        // eslint-disable-next-line consistent-return
+        .then((json) => {
+          console.log(json);
+          const plansCards = [];
+          for (let i = 0; i < json.plans.length; i += 1) {
+            plansCards.push(
+              <div className="listCard" key={`listCard${i}`}>
+                <div className="cardTitle">
+                  {json.plans[i].date}
+                  &nbsp;
+                </div>
+                <div className="cardRating">
+                  Rating: &nbsp;
+                  <button className="button" type="button" disabled>
+                    <select className="selectRate" onChange={(e) => handleRate(e.target.value, json.plans[i].id)}>
+                      <option value={`${json.plans[i].rating} stars`} selected disabled hidden>{`${json.plans[i].rating} stars`}</option>
+                      <option value="1">1 stars</option>
+                      <option value="2">2 stars</option>
+                      <option value="3">3 stars</option>
+                      <option value="4">4 stars</option>
+                      <option value="5">5 stars</option>
+                    </select>
+                  </button>
+                </div>
+                <Link className="cardViewBtn" to={`/plan?id=${json.plans[i].id}`}>
+                  <button className="cardViewBtn" type="button">
+                    Details
+                  </button>
+                </Link>
+                <a className="cardShareBtn" href>
+                  <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, json.plans[i].id)}>
+                    Share
+                  </button>
+                </a>
+                <a className="cardDeleteBtn" href>
+                  <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, json.plans[i].id)}>
+                    Delete
+                  </button>
+                </a>
+              </div>,
+            );
+          }
+          if (plansCards.length === 0) {
+            return <div className="emptyMessage">You have no saved date plansCards.</div>;
+          }
+
+          setPlans(plansCards);
+        });
     }
 
-    const plansCards = [];
-    for (let i = 0; i < mock.length; i += 1) {
-      plansCards.push(
-        <div className="listCard" key={`listCard${i}`}>
-          <div className="cardTitle">
-            {mock[i].date}
-            &nbsp;
-          </div>
-          <div className="cardRating">
-            Rating: &nbsp;
-            <button className="button" type="button" disabled>
-              <select className="selectRate" onChange={(e) => handleRate(e, mock[i].id)}>
-                <option value={`${mock[i].rating} stars`} selected disabled hidden>{`${mock[i].rating} stars`}</option>
-                <option value="1">1 stars</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-              </select>
-            </button>
-          </div>
-          <Link className="cardViewBtn" to={`/plan/${mock[i].id}`}>
-            <button className="cardViewBtn" type="button">
-              Details
-            </button>
-          </Link>
-          <a className="cardShareBtn" href>
-            <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, mock[i].id)}>
-              Share
-            </button>
-          </a>
-          <a className="cardDeleteBtn" href>
-            <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, mock[i].id)}>
-              Delete
-            </button>
-          </a>
-        </div>,
-      );
-    }
-    if (plansCards.length === 0) {
-      return <div className="emptyMessage">You have no saved date plansCards.</div>;
-    }
-
-    setPlans(plansCards);
+    getData();
   }, []);
 
   return (

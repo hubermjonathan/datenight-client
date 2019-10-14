@@ -34,21 +34,21 @@ function NavWithTabs(props) {
         <div className="tabs">
           <div className={mapTabClassName}>Map</div>
           <div onClick={onClickList} className={listTabClassName}>List</div>
-          <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>
+          {isAuthenticated && <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>}
         </div>
       )}
       {currentPage === 'list' && (
         <div className="tabs">
           <div onClick={onClickMap} className={mapTabClassName}>Map</div>
           <div className={listTabClassName}>List</div>
-          <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>
+          {isAuthenticated && <div onClick={onClickPlans} className={plansTabClassName}>Plans</div>}
         </div>
       )}
       {currentPage === 'plans' && (
         <div className="tabs">
           <div onClick={onClickMap} className={mapTabClassName}>Map</div>
           <div onClick={onClickList} className={listTabClassName}>List</div>
-          <div className={plansTabClassName}>Plans</div>
+          {isAuthenticated && <div className={plansTabClassName}>Plans</div>}
         </div>
       )}
 
