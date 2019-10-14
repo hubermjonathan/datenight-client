@@ -34,6 +34,14 @@
   grid-area: 5 / 1 / 6 / 5;
 }
 
+.cardShareBtn {
+  color: $text-2;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+  justify-content: center;
+  grid-area: 5 / 3 / 5 / 3;
+}
+
 .cardDeleteBtn {
   color: red;
   background-color: rgba(0, 0, 0, 0);

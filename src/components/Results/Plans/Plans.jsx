@@ -17,6 +17,17 @@ function Plans() {
     });
   }
 
+  function handleShare(event, id) {
+    const el = document.createElement('textarea');
+    el.value = `https://dank.dating/plan?id=${id}`;
+    el.setAttribute('readonly', '');
+    el.style = { position: 'absolute', left: '-1000px' };
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  }
+
   async function handleDelete(event, id) {
     fetch('https://datenight-api-251515.appspot.com/delete', {
       method: 'POST',
@@ -85,6 +96,11 @@ function Plans() {
               Details
             </button>
           </Link>
+          <a className="cardShareBtn" href>
+            <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, mock[i].id)}>
+              Share
+            </button>
+          </a>
           <a className="cardDeleteBtn" href>
             <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, mock[i].id)}>
               Delete
