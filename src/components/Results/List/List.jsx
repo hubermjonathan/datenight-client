@@ -43,7 +43,6 @@ function List(props) {
 
     for (let x = 0; x < activities.length; x += 1) {
       if (name !== activities[x].name) {
-        console.log(`comparing ${name} to ${activities[x].name}`);
         newCurrentActivities.push(
           <li>{activities[x].name} &nbsp;
             <button type="button" className="btn btn-danger" onClick={() => { deleteActivity(activities[x].name); }}>X</button>
@@ -52,11 +51,8 @@ function List(props) {
         newActivities.push(activities[x]);
       }
     }
-    console.log('newcurrent', newCurrentActivities);
-    console.log('new act', newActivities);
     addActivities([activities, newActivities]);
     addToActivities([currentActivities, newCurrentActivities]);
-    console.log(name, currentActivities);
   }
 
   function addToDateplan() {
@@ -90,7 +86,6 @@ function List(props) {
 
   function startDateplan() {
     toggleCreatePlan();
-    console.log(activities);
   }
 
   function onChangeDateplanName(event) {
@@ -133,15 +128,7 @@ function List(props) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(savedPlan),
-    })
-      .then((res) => {
-        res.json();
-        console.log('res', res);
-        console.log('saved plan:', savedPlan);
-      })
-      .then((json) => {
-        console.log('json', json);
-      });
+    });
 
     setBtnViewplan(true);
     addToActivities([]);
@@ -257,7 +244,6 @@ function List(props) {
   return (
     <div>
       <div className="utilityBar">
-<<<<<<< HEAD
         <button className="button" type="button" disabled>
           {isAuthenticated && (
             <div>
@@ -266,9 +252,6 @@ function List(props) {
             </div>
           )}
           <br />
-=======
-        <option className="button" type="button" disabled>
->>>>>>> 48a791aa54246f371dc8dfd58f906806310188b6
           Sort By:
           &nbsp;
           <select className="sort" onChange={onchangeSort} value={sortChange}>
@@ -276,7 +259,7 @@ function List(props) {
             <option value="price">Price</option>
             <option value="rating">Rating</option>
           </select>
-        </option>
+        </button>
       </div>
 
       <div>
@@ -290,7 +273,7 @@ function List(props) {
             Dateplan Name: <input type="text" onChange={onChangeDateplanName} />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={toggleBtnViewPlan}>Create</Button>{' '}
+            <Button color="primary" onClick={toggleBtnViewPlan}>Create</Button>&nbsp;
             <Button color="secondary" onClick={toggleCreatePlan}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -302,7 +285,7 @@ function List(props) {
             </h2>
           </ModalHeader>
           <ModalFooter>
-            <Button color="primary" onClick={addToDateplan}>Confirm</Button>{' '}
+            <Button color="primary" onClick={addToDateplan}>Confirm</Button>&nbsp;
             <Button color="secondary" onClick={toggleModal}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -319,7 +302,7 @@ function List(props) {
             </ul>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={saveDateplan}>Save</Button>{' '}
+            <Button color="success" onClick={saveDateplan}>Save</Button>&nbsp;
             <Button color="secondary" onClick={toggleViewPlan}>Exit</Button>
           </ModalFooter>
 
