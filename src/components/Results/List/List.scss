@@ -1,5 +1,19 @@
 @import "../../../common/global";
 
+.utilityBar {
+  font-size: 1.5rem;
+  grid-area: nav;
+  display: grid;
+  grid-template:
+    "l m r" 1fr
+    / 1fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  background-color: $primary;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
 .cardsContainer {
   height: 100%;
   grid-area: page;
