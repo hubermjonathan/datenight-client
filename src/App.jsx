@@ -27,7 +27,7 @@ const App = () => (
     <Route path="/" exact component={Landing} />
     <Route path="/form" exact component={Form} />
     <Route path="/results" exact component={Results} />
-    <Route path="/plan/:id" component={DatePlanDetailContainer} />
+    <Route path="/plan" exact component={DatePlanDetailContainer} />
   </Router>
 );
 
