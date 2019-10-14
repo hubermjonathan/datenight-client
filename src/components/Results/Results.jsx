@@ -4,6 +4,7 @@ import './Results.scss';
 import NavWithTabs from '../../common/NavWithTabs/NavWithTabs';
 import Map from './Map/Map';
 import List from './List/List';
+import Plans from './Plans/Plans';
 
 function Results(props) {
   const { location } = props;
@@ -14,8 +15,10 @@ function Results(props) {
     if (currentPage === 'map') {
       return <Map pins={results} center={center} />;
     }
-
-    return <List results={results} />;
+    if (currentPage === 'list') {
+      return <List results={results} />;
+    }
+    return <Plans results={results} />;
   }
 
   function changeToMap() {
@@ -26,9 +29,18 @@ function Results(props) {
     setCurrentPage('list');
   }
 
+  function changeToPlans() {
+    setCurrentPage('plans');
+  }
+
   return (
     <div className="results">
-      <NavWithTabs currentPage={currentPage} onClickMap={changeToMap} onClickList={changeToList} />
+      <NavWithTabs
+        currentPage={currentPage}
+        onClickMap={changeToMap}
+        onClickList={changeToList}
+        onClickPlans={changeToPlans}
+      />
 
       {getPage()}
     </div>
