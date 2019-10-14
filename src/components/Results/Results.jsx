@@ -39,7 +39,7 @@ function Results(props) {
         currentPage={currentPage}
         onClickMap={changeToMap}
         onClickList={changeToList}
-        changeToPlans={changeToPlans}
+        onClickPlans={changeToPlans}
       />
 
       {getPage()}
