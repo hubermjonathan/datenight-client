@@ -15,7 +15,6 @@ function Plans() {
       dateid: id,
       rating: +event,
     };
-    console.log(body);
     fetch('https://datenight-api-251515.appspot.com/rate', {
       method: 'POST',
       headers: {
@@ -64,7 +63,6 @@ function Plans() {
         .then((res) => res.json())
         // eslint-disable-next-line consistent-return
         .then((json) => {
-          console.log(json);
           const plansCards = [];
           for (let i = 0; i < json.plans.length; i += 1) {
             plansCards.push(
