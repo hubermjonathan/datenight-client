@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
@@ -8,79 +9,143 @@ import {
   ModalBody,
   ModalFooter,
 } from 'reactstrap';
-
+import { useAuth0 } from '../../../common/authHook';
 import './List.scss';
 
 const priceLevels = ['', '$', '$$', '$$$', '$$$$'];
 
-
 function List(props) {
-  const dummyDateplans = [];
-  const dummyVenues = [];
-  for (let x = 0; x < 3; x += 1) {
-    dummyDateplans.push(
-      <option key={x} value={`test${x}`}>test{x}</option>,
-    );
-  }
-  for (let x = 0; x < 4; x += 1) {
-    dummyVenues.push(
-      <p>Venue {x} </p>,
-    );
-  }
+  const {
+    isAuthenticated,
+    user,
+    getTokenSilently,
+  } = useAuth0();
 
   const { results } = props;
   const [sortChange, setSortChange] = useState('');
+  const [createPlanModal, setCreatPlanModal] = useState(false);
   const [modal, setModal] = useState(false);
-  const [createModal, setCreateModal] = useState(false);
+  const [viewPlan, setViewPlan] = useState(false);
   const [resultIndex, setResultIndex] = useState(0);
-  const [selectedDateplan, setDateplan] = useState(dummyDateplans[0]);
-  const [modalAddVisible, setModalAddDisabled] = useState(false);
-  // const [newDateplanName, setNewDateplanName] = useState('');  column 'date' = name of dateplan
+  const [activities, addActivities] = useState([]);
+  const [dateplanName, setDateplanName] = useState('');
+  const [btnViewplanDisabled, setBtnViewplan] = useState(true);
+  const [currentActivities, addToActivities] = useState([]);
+  // const [viewplanDisabled, setViewplanDisable] = useState(true);
 
-
+  const toggleCreatePlan = () => setCreatPlanModal(!createPlanModal);
   const toggleModal = () => setModal(!modal);
-  const toggleCreateModal = () => setCreateModal(!createModal);
+  const toggleViewPlan = () => setViewPlan(!viewPlan);
 
-  function toggleModalCancel() {
-    toggleModal();
-    setDateplan('');
-    setModalAddDisabled(true);
+  function deleteActivity(name) {
+    const newCurrentActivities = [];
+    const newActivities = [];
+
+    for (let x = 0; x < activities.length; x += 1) {
+      if (name !== activities[x].name) {
+        console.log(`comparing ${name} to ${activities[x].name}`);
+        newCurrentActivities.push(
+          <li>{activities[x].name} &nbsp;
+            <button type="button" className="btn btn-danger" onClick={() => { deleteActivity(activities[x].name); }}>X</button>
+          </li>,
+        );
+        newActivities.push(activities[x]);
+      }
+    }
+    console.log('newcurrent', newCurrentActivities);
+    console.log('new act', newActivities);
+    addActivities([activities, newActivities]);
+    addToActivities([currentActivities, newCurrentActivities]);
+    console.log(name, currentActivities);
   }
 
   function addToDateplan() {
     toggleModal();
-    setDateplan('');
-    setModalAddDisabled(true);
     // perform sql insert here
+    const a = {
+      name: results[resultIndex].name,
+      placeid: results[resultIndex].placeID,
+      lat: results[resultIndex].location.lat,
+      long: results[resultIndex].location.lng,
+      address: results[resultIndex].address,
+      price: results[resultIndex].priceLevel,
+      rating: results[resultIndex].rating,
+      website: results[resultIndex].website,
+      phone: results[resultIndex].phoneNumber,
+    };
+    const li = (
+      <li>{results[resultIndex].name} &nbsp;
+        <button type="button" className="btn btn-danger" onClick={() => { deleteActivity(results[resultIndex].name); }}>X</button>
+      </li>
+    );
+    addToActivities([...currentActivities, li]);
+    addActivities([...activities, a]);
   }
+
+
   function dateplanClick(i) {
     setResultIndex(i);
     toggleModal();
   }
 
-  function showVenues(status) {
-    if (status) {
-      return '';
+  function startDateplan() {
+    toggleCreatePlan();
+    console.log(activities);
+  }
+
+  function onChangeDateplanName(event) {
+    setDateplanName(event.target.value);
+  }
+
+  function toggleBtnViewPlan() {
+    if (dateplanName.length > 0) {
+      toggleCreatePlan();
+      setBtnViewplan(false);
     }
-    return '';
   }
 
-  function onChangeDateplan(event) {
-    // check if selected dateplan has venues in it, if it does => showVenues(true)
-    setModalAddDisabled(false);
-    setDateplan(event.target.value);
+  function openViewDateplan() {
+    toggleViewPlan();
   }
 
-  function createDateplan() {
-    console.log('create btn clicked');
-    toggleCreateModal();
-    // perform sql insert here
+  async function getToken() {
+    const x = await getTokenSilently();
+    return x;
   }
 
-  function updateDateplans() {
-    // insert new dateplan into database here
-    console.log('insert dateplan');
-    toggleCreateModal();
+  async function saveDateplan() {
+    toggleViewPlan();
+    const acts = activities;
+    const authuser = user.name;
+    const savedPlan = {
+      user: authuser,
+      name: dateplanName,
+      rating: 0,
+      activities: acts,
+    };
+
+    const token = await getToken();
+
+    fetch('https://datenight-api-251515.appspot.com/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(savedPlan),
+    })
+      .then((res) => {
+        res.json();
+        console.log('res', res);
+        console.log('saved plan:', savedPlan);
+      })
+      .then((json) => {
+        console.log('json', json);
+      });
+
+    setBtnViewplan(true);
+    addToActivities([]);
+    addActivities([]);
   }
 
   function displayHours(hours) {
@@ -88,10 +153,14 @@ function List(props) {
       return '\n Hours not available \n';
     }
     const date = new Date();
-    const today = date.getDay() - 1;
+    let today = date.getDay() - 1;
+    if (today < 0) { // is a sunday
+      today = 6;
+    }
     const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 2)}`;
     return h;
   }
+
   function getCards() {
     const createdCards = [];
     if (results) {
@@ -114,7 +183,7 @@ function List(props) {
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
-            <button type="button" className="btn btn-primary" onClick={() => { dateplanClick(i); }}>Add to Dateplan</button>
+            {isAuthenticated && (<button type="button" className="btn btn-primary" onClick={() => { dateplanClick(i); }}>Add</button>)}
           </div>,
         );
       }
@@ -189,6 +258,13 @@ function List(props) {
     <div>
       <div className="utilityBar">
         <button className="button" type="button" disabled>
+          {isAuthenticated && (
+            <div>
+              <button type="button" className="btn btn-success" onClick={startDateplan}>Start Dateplan</button>&nbsp;&nbsp;
+              <button type="button" className="btn btn-info" onClick={() => { openViewDateplan(); }} disabled={btnViewplanDisabled}>View Dateplan</button>
+            </div>
+          )}
+          <br />
           Sort By:
           {' '}
           <select className="sort" onChange={onchangeSort} value={sortChange}>
@@ -200,41 +276,49 @@ function List(props) {
       </div>
 
       <div>
+        <Modal isOpen={createPlanModal} toggle={toggleCreatePlan} style={{ color: 'black' }}>
+          <ModalHeader toggle={toggleCreatePlan}>
+            <h2>
+              Create Dateplan
+            </h2>
+          </ModalHeader>
+          <ModalBody style={{ fontSize: 15 }}>
+            Dateplan Name: <input type="text" onChange={onChangeDateplanName} />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={toggleBtnViewPlan}>Create</Button>{' '}
+            <Button color="secondary" onClick={toggleCreatePlan}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+
         <Modal isOpen={modal} toggle={toggleModal} style={{ color: 'black' }}>
           <ModalHeader toggle={toggleModal}>
             <h2>
-              Add to a Dateplan
+              Add to a Dateplan?
             </h2>
           </ModalHeader>
-          <ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={addToDateplan}>Confirm</Button>{' '}
+            <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
 
-            <Modal isOpen={createModal} toggle={toggleCreateModal} style={{ color: 'black' }}>
-              <ModalHeader> <h2>Create Dateplan</h2> </ModalHeader>
-              <ModalBody>
-                <p>Create dateplan</p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="success" onClick={updateDateplans}>Create</Button>
-                <Button color="secondary" onClick={toggleCreateModal}>Cancel</Button>
-              </ModalFooter>
-            </Modal>
-
-            <div>
-              <select className="form-control" onChange={onChangeDateplan} value={selectedDateplan}>
-                {dummyDateplans}
-              </select>
-            </div>
-            <p style={{ fontSize: 12 }}>
-              result index: {resultIndex} &nbsp;
-              selected Dateplan: {selectedDateplan}
-            </p>
-            {showVenues(!modalAddVisible)}
+        <Modal isOpen={viewPlan} toggle={toggleViewPlan} style={{ color: ' black' }}>
+          <ModalHeader toggle={toggleViewPlan}>
+            <h2>
+              Current Activities
+            </h2>
+          </ModalHeader>
+          <ModalBody style={{ fontSize: 15 }}>
+            <ul>
+              {currentActivities}
+            </ul>
           </ModalBody>
           <ModalFooter>
-            <Button color="info" onClick={createDateplan}>Create Dateplan</Button>
-            <Button color="primary" onClick={addToDateplan} disabled={modalAddVisible}>Add</Button>{' '}
-            <Button color="secondary" onClick={toggleModalCancel}>Cancel</Button>
+            <Button color="success" onClick={saveDateplan}>Save</Button>{' '}
+            <Button color="secondary" onClick={toggleViewPlan}>Exit</Button>
           </ModalFooter>
+
         </Modal>
       </div>
 
