@@ -43,7 +43,6 @@ function Results(props) {
       />
 
       {getPage()}
-
     </div>
   );
 }

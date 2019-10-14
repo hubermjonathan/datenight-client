@@ -157,7 +157,6 @@ function Form() {
             <option>food</option>
             <option>nightlife</option>
             <option>shopping</option>
-            <option>crowdsourced</option>
           </select>
         </div>
 

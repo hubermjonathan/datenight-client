@@ -4,7 +4,7 @@
   "description": "datenight is the search engine for finding the perfect date ideas in your price range and area",
   "main": "src/App.jsx",
   "scripts": {
-    "lint": "eslint src/*",
+    "lint": "eslint .",
     "test": "jest --watch",
     "clean": "rm -f public/bundle.js && rm package-lock.json && rm -rf node_modules",
     "dev": "webpack-dev-server",
@@ -41,10 +41,12 @@
     "@auth0/auth0-spa-js": "^1.2.3",
     "@babel/polyfill": "^7.6.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.10.2",
+    "react-bootstrap-modal": "^4.2.0",
+    "react-dom": "^16.10.2",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "reactstrap": "^8.0.1"
   },
   "jest": {
     "moduleNameMapper": {

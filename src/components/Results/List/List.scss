@@ -57,3 +57,10 @@
   font-size: 2rem;
   font-weight: $bold;
 }
+
+.form-control {
+  color: $text-2;
+  -moz-border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
