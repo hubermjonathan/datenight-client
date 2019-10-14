@@ -39,7 +39,7 @@ function List(props) {
                 </div>
               )}
             <div className="listCardAddress">{results[i].address}</div>
-            {results[i].rating && <div className="listCardPhone">{results[i].phone}</div>}
+            {results[i].phone && <div className="listCardPhone">{results[i].phone}</div>}
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
@@ -110,15 +110,15 @@ function List(props) {
   return (
     <div>
       <div className="utilityBar">
-        <button className="button" type="button" disabled>
+        <option className="button" type="button" disabled>
           Sort By:
-          {' '}
+          &nbsp;
           <select className="sort" onChange={onchangeSort} value={sortChange}>
             <option value="" disabled hidden>Default</option>
             <option value="price">Price</option>
             <option value="rating">Rating</option>
           </select>
-        </button>
+        </option>
       </div>
 
       <div className="cardsContainer">

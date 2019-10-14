@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './Results.scss';
-import Nav from '../../common/Nav/Nav';
+import NavWithTabs from '../../common/NavWithTabs/NavWithTabs';
 import Map from './Map/Map';
 import List from './List/List';
 import Plans from './Plans/Plans';
@@ -35,12 +35,13 @@ function Results(props) {
 
   return (
     <div className="results">
-      <Nav
+      <NavWithTabs
         currentPage={currentPage}
         onClickMap={changeToMap}
         onClickList={changeToList}
-        onClickPlans={changeToPlans}
+        changeToPlans={changeToPlans}
       />
+
       {getPage()}
 
     </div>
