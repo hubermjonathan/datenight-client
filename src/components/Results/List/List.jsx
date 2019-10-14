@@ -7,10 +7,7 @@ const priceLevels = ['$', '$$', '$$$', '$$$$', '$$$$$'];
 
 function List(props) {
   const { results } = props;
-<<<<<<< HEAD
-=======
   const [sortChange, setSortChange] = useState('');
->>>>>>> c947aca9ec4ece36bd2df22205ed597c52dbb47d
 
   function displayHours(hours) {
     if (typeof hours === 'undefined') {
@@ -115,7 +112,7 @@ function List(props) {
       <div className="utilityBar">
         <button className="button" type="button" disabled>
           Sort By:
-          {' '}
+          &nbsp;
           <select className="sort" onChange={onchangeSort} value={sortChange}>
             <option value="" disabled hidden>Default</option>
             <option value="price">Price</option>
