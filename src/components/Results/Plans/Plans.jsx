@@ -8,6 +8,7 @@ function Plans(props) {
   const { results } = props;
 
   async function handleRate(event, id) {
+    console.log('lmao');
     fetch('https://datenight-api-251515.appspot.com/rate', {
       method: 'POST',
       headers: {
@@ -70,7 +71,7 @@ function Plans(props) {
           <div className="cardRating">
             Rating: {' '}
             <button className="button" type="button" disabled>
-              <select className="selectRate" onChange={handleRate.bind(mock[i].id)}>
+              <select className="selectRate" onChange={(e) => handleRate(e, mock[i].id)}>
                 <option value={`${mock[i].rating} stars`} selected disabled hidden>{`${mock[i].rating} stars`}</option>
                 <option value="1">1 stars</option>
                 <option value="2">2 stars</option>
@@ -86,7 +87,7 @@ function Plans(props) {
             </button>
           </Link>
           <a className="cardDeleteBtn" href>
-            <button className="cardDeleteBtn" type="button" onClick={handleDelete}>
+            <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, mock[i].id)}>
               Delete
             </button>
           </a>
