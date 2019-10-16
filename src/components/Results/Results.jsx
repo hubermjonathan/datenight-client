@@ -4,7 +4,7 @@ import './Results.scss';
 import NavWithTabs from '../../common/NavWithTabs/NavWithTabs';
 import Map from './Map/Map';
 import List from './List/List';
-import Plans from './Plans/Plans';
+import PlansContainer from './Plans/PlansContainer';
 
 function Results(props) {
   const { location } = props;
@@ -18,7 +18,7 @@ function Results(props) {
     if (currentPage === 'list') {
       return <List results={results} />;
     }
-    return <Plans results={results} />;
+    return <PlansContainer results={results} />;
   }
 
   function changeToMap() {

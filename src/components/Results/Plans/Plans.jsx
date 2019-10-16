@@ -1,29 +1,16 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Plans.scss';
-import { useAuth0 } from '../../../common/authHook';
 
-function Plans() {
-  const [plans, setPlans] = useState();
-  const { getTokenSilently } = useAuth0();
-
-  async function handleRate(event, id) {
-    const token = await getTokenSilently();
-    const body = {
-      dateid: id,
-      rating: +event,
-    };
-    fetch('https://datenight-api-251515.appspot.com/rate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
-  }
+function Plans(props) {
+  const {
+    loading,
+    plans,
+    handleRate,
+    handleDelete,
+  } = props;
 
   function handleShare(event, id) {
     const el = document.createElement('textarea');
@@ -36,87 +23,57 @@ function Plans() {
     document.body.removeChild(el);
   }
 
-  async function handleDelete(event, id) {
-    const token = await getTokenSilently();
-    const body = {
-      dateid: id,
-    };
-    fetch('https://datenight-api-251515.appspot.com/delete', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
-  }
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    async function getData() {
-      const token = await getTokenSilently();
-      fetch('https://datenight-api-251515.appspot.com/plans', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        // eslint-disable-next-line consistent-return
-        .then((json) => {
-          const plansCards = [];
-          for (let i = 0; i < json.plans.length; i += 1) {
-            plansCards.push(
-              <div className="plansCard" key={`plansCard${i}`}>
-                <div className="cardTitle">
-                  {json.plans[i].date}
-                  &nbsp;
-                </div>
-                <div className="cardRating">
-                  Rating: &nbsp;
-                  <button className="button" type="button" disabled>
-                    <select className="selectRate" onChange={(e) => handleRate(e.target.value, json.plans[i].dateid)}>
-                      <option value={`${json.plans[i].rating} stars`} selected disabled hidden>{`${json.plans[i].daterating} stars`}</option>
-                      <option value="1">1 stars</option>
-                      <option value="2">2 stars</option>
-                      <option value="3">3 stars</option>
-                      <option value="4">4 stars</option>
-                      <option value="5">5 stars</option>
-                    </select>
-                  </button>
-                </div>
-                <Link className="cardViewBtn" to={`/plan?id=${json.plans[i].dateid}`}>
-                  <button className="cardViewBtn" type="button">
-                    Details
-                  </button>
-                </Link>
-                <a className="cardShareBtn" href>
-                  <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, json.plans[i].dateid)}>
-                    Share
-                  </button>
-                </a>
-                <a className="cardDeleteBtn" href>
-                  <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, json.plans[i].dateid)}>
-                    Delete
-                  </button>
-                </a>
-              </div>,
-            );
-          }
-          if (plansCards.length === 0) {
-            return <div className="emptyMessage">You have no saved date plansCards.</div>;
-          }
-
-          setPlans(plansCards);
-        });
+  function createCards() {
+    const plansCards = [];
+    for (let i = 0; i < plans.length; i += 1) {
+      plansCards.push(
+        <div className="plansCard" key={`plansCard${i}`}>
+          <div className="cardTitle">
+            {plans[i].date}
+            &nbsp;
+          </div>
+          <div className="cardRating">
+            Rating: &nbsp;
+            <button className="button" type="button" disabled>
+              <select className="selectRate" onChange={(e) => handleRate(e.target.value, plans[i].dateid)}>
+                <option value={`${plans[i].daterating} stars`} selected disabled hidden>{`${plans[i].daterating} stars`}</option>
+                <option value="1">1 stars</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+              </select>
+            </button>
+          </div>
+          <Link className="cardViewBtn" to={`/plan?id=${plans[i].dateid}`}>
+            <button className="cardViewBtn" type="button">
+              Details
+            </button>
+          </Link>
+          <a className="cardShareBtn" href>
+            <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, plans[i].dateid)}>
+              Share
+            </button>
+          </a>
+          <a className="cardDeleteBtn" href>
+            <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, plans[i].dateid)}>
+              Delete
+            </button>
+          </a>
+        </div>,
+      );
+    }
+    if (plansCards.length === 0) {
+      return <div className="emptyMessage">You have no saved date plansCards.</div>;
     }
 
-    getData();
-  }, []);
+    return plansCards;
+  }
 
   return (
     <div>
       <div className="planContainer">
-        {plans}
+        {!loading && createCards()}
       </div>
     </div>
   );
