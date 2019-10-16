@@ -52,9 +52,19 @@ describe('<DatePlanDetail />', () => {
     });
   });
 
+  it('renders a 404 for an invalid date plan', () => {
+    const wrapper = Enzyme.mount(
+      <StaticRouter basename="/plan?id=123">
+        <DatePlanDetail loading={loading} name="" rating={-1} items={[]} />
+      </StaticRouter>,
+    );
+    expect(wrapper.find('.detailTitle')).toHaveLength(1);
+    expect(wrapper.find('.detailTitle').at(0).text()).toMatch('404: Dateplan not found');
+  });
+
   it('renders the dateplan title', () => {
     const wrapper = Enzyme.mount(
-      <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
+      <StaticRouter basename="/plan?id=04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
         <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
@@ -64,7 +74,7 @@ describe('<DatePlanDetail />', () => {
 
   it('renders the dateplan rating with a null rating', () => {
     const wrapper = Enzyme.mount(
-      <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
+      <StaticRouter basename="/plan?id=04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
         <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
@@ -74,7 +84,7 @@ describe('<DatePlanDetail />', () => {
 
   it('renders the dateplan item cards', () => {
     const wrapper = Enzyme.mount(
-      <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
+      <StaticRouter basename="/plan?id=04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
         <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );
@@ -83,7 +93,7 @@ describe('<DatePlanDetail />', () => {
 
   it('renders one of the cards correctly', () => {
     const wrapper = Enzyme.mount(
-      <StaticRouter basename="/plan/04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
+      <StaticRouter basename="/plan?id=04fd2d02-eddc-11e9-833f-02c9b3b50bb8">
         <DatePlanDetail loading={loading} name={name} rating={rating} items={items} />
       </StaticRouter>,
     );

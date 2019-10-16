@@ -1,9 +1,15 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import sinon from 'sinon';
 import List from './List';
+import { useAuth0 } from '../../../common/authHook';
 
 Enzyme.configure({ adapter: new Adapter() });
+jest.mock('../../../common/authHook');
+const loginSpy = sinon.spy();
+const logoutSpy = sinon.spy();
+const getTokenSilentlySpy = sinon.spy();
 
 describe('<List />', () => {
   const results = [
@@ -47,13 +53,27 @@ describe('<List />', () => {
     },
   ];
 
-  const wrapper = Enzyme.mount(<List results={results} />);
+  beforeEach(() => {
+    useAuth0.mockReturnValue({
+      isAuthenticated: false,
+      user: {
+        email: 'hubermjonathan@gmail.com',
+        email_verified: true,
+      },
+      logout: logoutSpy,
+      loginWithRedirect: loginSpy,
+      getTokenSilently: getTokenSilentlySpy,
+    });
+  });
+
 
   it('renders the cards container', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.cardsContainer')).toHaveLength(1);
   });
 
   it('renders the cards', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCard')).toHaveLength(results.length);
   });
 
@@ -64,35 +84,48 @@ describe('<List />', () => {
   });
 
   it('renders the card titles', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardTitle')).toHaveLength(results.length);
   });
 
   it('renders the card ratings', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardRating')).toHaveLength(results.length - 1);
   });
 
   it('renders the card phone numbers', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardPhone')).toHaveLength(results.length - 1);
   });
 
   it('renders the card websites', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardWebsite')).toHaveLength(results.length);
   });
 
   it('renders a message for no website', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardWebsite').at(1).text()).toMatch('no website');
   });
 
   it('renders the card price levels', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardTitle').at(0).text()).toContain('$$');
   });
 
+  it('renders card without a price level', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.listCardTitle').at(1).text()).not.toContain('$');
+  });
+
   it('renders the card hours', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardHours')).toHaveLength(results.length);
     expect(wrapper.find('.listCardHours').at(0).text()).toContain('Today: HOURS');
   });
 
   it('renders a message for no hours', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardHours').at(1).text()).toContain('\n Hours not available \n');
   });
 });

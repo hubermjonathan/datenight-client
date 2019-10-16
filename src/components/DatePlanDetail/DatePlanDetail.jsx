@@ -13,6 +13,7 @@ function DatePlanDetail(props) {
   } = props;
 
   function createDateplanCards() {
+    if (items.length === 0) return [];
     return items.map((item) => (
       <div className="detailCard" key={item.placeid}>
         <div className="detailCardTitle">{item.name}</div>
@@ -37,9 +38,11 @@ function DatePlanDetail(props) {
       {loading && <div />}
       {!loading && (
         <div className="cards">
-          <div className="detailTitle">{name}</div>
-          {rating !== null && <div className="detailRating">{rating} stars</div>}
+          {name === '' && <div className="detailTitle">404: Dateplan not found</div>}
+          {name !== '' && <div className="detailTitle">{name}</div>}
+          {(rating !== null && rating !== -1) && <div className="detailRating">{rating} stars</div>}
           {rating === null && <div className="detailRating">not rated</div>}
+          {rating === -1 && <div className="detailRating" />}
           {createDateplanCards()}
         </div>
       )}

@@ -12,10 +12,17 @@ function DatePlanDetailContainer() {
     fetch(`https://datenight-api-251515.appspot.com/plan/${id}`)
       .then((res) => res.json())
       .then((json) => {
-        setName(json.date);
-        setRating(json.rating);
-        setItems(json.activities);
-        setLoading(false);
+        if (json.message && json.message === 'Sorry, something went wrong') {
+          setName('');
+          setRating(-1);
+          setItems([]);
+          setLoading(false);
+        } else {
+          setName(json.date);
+          setRating(json.rating);
+          setItems(json.activities);
+          setLoading(false);
+        }
       });
   }, []);
 
