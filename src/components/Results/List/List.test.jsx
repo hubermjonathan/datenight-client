@@ -113,6 +113,11 @@ describe('<List />', () => {
     expect(wrapper.find('.listCardTitle').at(0).text()).toContain('$$');
   });
 
+  it('renders card without a price level', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.listCardTitle').at(1).text()).not.toContain('$');
+  });
+
   it('renders the card hours', () => {
     const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardHours')).toHaveLength(results.length);
