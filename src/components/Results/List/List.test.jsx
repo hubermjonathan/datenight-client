@@ -189,4 +189,13 @@ describe('<List />', () => {
     wrapper.find('button').at(1).simulate('click');
     expect(wrapper.find('li')).toHaveLength(0);
   });
+
+  it('renders save dateplan btn', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'dateplan1' } });
+    wrapper.find('Button').at(0).simulate('click');
+    wrapper.find('button').at(1).simulate('click');
+    expect(wrapper.find('Button').at(2)).toHaveLength(1);
+  });
 });
