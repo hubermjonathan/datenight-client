@@ -36,7 +36,7 @@ function Plans(props) {
             Rating: &nbsp;
             <button className="button" type="button" disabled>
               <select className="selectRate" onChange={(e) => handleRate(e.target.value, plans[i].dateid)}>
-                <option value={`${plans[i].daterating} stars`} selected disabled hidden>{`${plans[i].daterating} stars`}</option>
+                <option value={`${plans[i].daterating} stars`} select="true" disabled hidden>{`${plans[i].daterating} stars`}</option>
                 <option value="1">1 stars</option>
                 <option value="2">2 stars</option>
                 <option value="3">3 stars</option>
@@ -50,12 +50,12 @@ function Plans(props) {
               Details
             </button>
           </Link>
-          <a className="cardShareBtn" href>
+          <a className="cardShareBtn" href="true">
             <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, plans[i].dateid)}>
               Share
             </button>
           </a>
-          <a className="cardDeleteBtn" href>
+          <a className="cardDeleteBtn" href="true">
             <button className="cardDeleteBtn" type="button" onClick={(e) => handleDelete(e, plans[i].dateid)}>
               Delete
             </button>
@@ -64,7 +64,7 @@ function Plans(props) {
       );
     }
     if (plansCards.length === 0) {
-      return <div className="emptyMessage">You have no saved date plansCards.</div>;
+      return <div className="emptyMessage">You have no saved date plans.</div>;
     }
 
     return plansCards;
