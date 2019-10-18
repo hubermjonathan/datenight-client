@@ -143,4 +143,50 @@ describe('<List />', () => {
     const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCard').at(0).text().includes('Add')).toBe(true);
   });
+
+  it('clicks add btn', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.btn-primary').at(1).simulate('click')).toHaveLength(1);
+  });
+
+  it('clicks start plans btn', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('button').at(0).simulate('click')).toHaveLength(1);
+  });
+
+  it('disables view plans btn if no dateplan name exists', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('button').at(1).prop('disabled')).toBe(true);
+  });
+
+  it('enables view plans btn if dateplan name exists', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'dateplan1' } });
+    wrapper.find('Button').at(0).simulate('click');
+    expect(wrapper.find('button').at(1).prop('disabled')).toBe(false);
+  });
+
+  it('displays the activities if one was added', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'dateplan1' } });
+    wrapper.find('Button').at(0).simulate('click');
+
+    wrapper.find('.listCard').at(0).find('button').at(0)
+      .simulate('click');
+    wrapper.find('Button').at(2).simulate('click');
+
+    wrapper.find('button').at(1).simulate('click');
+    expect(wrapper.find('li')).toHaveLength(1);
+  });
+
+  it('displays nothing if no activity was added', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'dateplan1' } });
+    wrapper.find('Button').at(0).simulate('click');
+    wrapper.find('button').at(1).simulate('click');
+    expect(wrapper.find('li')).toHaveLength(0);
+  });
 });
