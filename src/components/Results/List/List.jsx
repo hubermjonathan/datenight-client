@@ -151,7 +151,7 @@ function List(props) {
             {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
             {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
-            {isAuthenticated && (<button type="button" className="btn btn-primary" onClick={() => { dateplanClick(i); }}>Add</button>)}
+            {isAuthenticated && <button type="button" className="btn btn-primary" onClick={() => { dateplanClick(i); }}>Add</button>}
           </div>,
         );
       }
@@ -225,14 +225,13 @@ function List(props) {
   return (
     <div>
       <div className="utilityBar">
+        {isAuthenticated && (
+          <div>
+            <button type="button" className="btn btn-success" onClick={startDateplan}>Start Dateplan</button>&nbsp;&nbsp;
+            <button type="button" className="btn btn-info" onClick={() => { openViewDateplan(); }} disabled={btnViewplanDisabled}>View Dateplan</button>
+          </div>
+        )}
         <button className="button" type="button" disabled>
-          {isAuthenticated && (
-            <div>
-              <button type="button" className="btn btn-success" onClick={startDateplan}>Start Dateplan</button>&nbsp;&nbsp;
-              <button type="button" className="btn btn-info" onClick={() => { openViewDateplan(); }} disabled={btnViewplanDisabled}>View Dateplan</button>
-            </div>
-          )}
-          <br />
           Sort By:
           &nbsp;
           <select className="sort" onChange={onchangeSort} value={sortChange}>
