@@ -210,12 +210,6 @@ describe('<List />', () => {
     expect(wrapper.find('option')).toHaveLength(3);
   });
 
-  it('check sorting option render', () => {
-    const wrapper = Enzyme.mount(<List results={results} />);
-    wrapper.find('.sort').simulate('click');
-    expect(wrapper.find('option')).toHaveLength(3);
-  });
-
   it('check sorting price', () => {
     const wrapper = Enzyme.mount(<List results={results} />);
     wrapper.find('.sort').simulate('change', { target: { value: 'price' } });
