@@ -39,7 +39,7 @@ describe('<List />', () => {
       },
       name: '7 Leaves',
       phone: '(408) 618-8401',
-      rating: '4.4',
+      rating: '3',
     },
     {
       location: {
@@ -197,5 +197,34 @@ describe('<List />', () => {
     wrapper.find('Button').at(0).simulate('click');
     wrapper.find('button').at(1).simulate('click');
     expect(wrapper.find('Button').at(2)).toHaveLength(1);
+  });
+
+  it('check sort render', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('select.sort')).toHaveLength(1);
+  });
+
+  it('check sorting option render', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('.sort').simulate('click');
+    expect(wrapper.find('option')).toHaveLength(3);
+  });
+
+  it('check sorting option render', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('.sort').simulate('click');
+    expect(wrapper.find('option')).toHaveLength(3);
+  });
+
+  it('check sorting price', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('.sort').simulate('change', { target: { value: 'price' } });
+    expect(wrapper.find('.listCard').at(0).html()).toMatch('$$');
+  });
+
+  it('check sorting rating', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    wrapper.find('.sort').simulate('change', { target: { value: 'rating' } });
+    expect(wrapper.find('.listCard').at(0).html()).toMatch('4.4');
   });
 });
