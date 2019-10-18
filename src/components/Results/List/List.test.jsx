@@ -55,7 +55,7 @@ describe('<List />', () => {
 
   beforeEach(() => {
     useAuth0.mockReturnValue({
-      isAuthenticated: false,
+      isAuthenticated: true,
       user: {
         email: 'hubermjonathan@gmail.com',
         email_verified: true,
@@ -127,5 +127,20 @@ describe('<List />', () => {
   it('renders a message for no hours', () => {
     const wrapper = Enzyme.mount(<List results={results} />);
     expect(wrapper.find('.listCardHours').at(1).text()).toContain('\n Hours not available \n');
+  });
+
+  it('renders start dateplan btn', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.utilityBar').at(0).text().includes('Start Dateplan')).toBe(true);
+  });
+
+  it('renders view dateplan btn', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.utilityBar').at(0).text().includes('View Dateplan')).toBe(true);
+  });
+
+  it('renders add btn on card(s)', () => {
+    const wrapper = Enzyme.mount(<List results={results} />);
+    expect(wrapper.find('.listCard').at(0).text().includes('Add')).toBe(true);
   });
 });
