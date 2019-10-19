@@ -5,7 +5,7 @@
   "main": "src/App.jsx",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest --watch",
+    "test": "jest",
     "clean": "rm -f public/bundle.js && rm package-lock.json && rm -rf node_modules",
     "dev": "webpack-dev-server",
     "build": "webpack --mode production"
