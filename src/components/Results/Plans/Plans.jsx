@@ -8,7 +8,6 @@ function Plans(props) {
   const {
     loading,
     plans,
-    handleRate,
     handleDelete,
   } = props;
 
@@ -35,7 +34,7 @@ function Plans(props) {
           <div className="cardRating">
             Rating: &nbsp;
             <button className="button" type="button" disabled>
-              <select className="selectRate" onChange={(e) => handleRate(e.target.value, plans[i].dateid)}>
+              <select className="selectRate" onChange={(e) => handleShare(e.target.value, plans[i].dateid)}>
                 <option value={`${plans[i].daterating} stars`} select="true" disabled hidden>{`${plans[i].daterating} stars`}</option>
                 <option value="1">1 stars</option>
                 <option value="2">2 stars</option>
@@ -50,7 +49,7 @@ function Plans(props) {
               Details
             </button>
           </Link>
-          <a className="cardShareBtn" href="true">
+          <a className="cardShareBtn" href>
             <button className="cardShareBtn" type="button" onClick={(e) => handleShare(e, plans[i].dateid)}>
               Share
             </button>
