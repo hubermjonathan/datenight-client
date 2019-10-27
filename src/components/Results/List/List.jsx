@@ -52,7 +52,7 @@ function List(props) {
       phone: results[resultIndex].phoneNumber,
     };
     const li = (
-      <li>{results[resultIndex].name} &nbsp;
+      <li>{results[resultIndex].placeid} &nbsp;
       </li>
     );
     addToActivities([...currentActivities, li]);
@@ -70,14 +70,13 @@ function List(props) {
   }
 
   function onChangeDateplanName(event) {
+    toggleCreatePlan();
     setDateplanName(event.target.value);
   }
 
   function toggleBtnViewPlan() {
-    if (dateplanName.length > 0) {
-      toggleCreatePlan();
-      setBtnViewplan(false);
-    }
+    toggleCreatePlan();
+    setBtnViewplan(false);
   }
 
   function openViewDateplan() {
@@ -121,10 +120,7 @@ function List(props) {
       return '\n Hours not available \n';
     }
     const date = new Date();
-    let today = date.getDay() - 1;
-    if (today < 0) { // is a sunday
-      today = 6;
-    }
+    const today = date.getDay() - 1;
     const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 2)}`;
     return h;
   }
@@ -270,7 +266,7 @@ function List(props) {
           </ModalFooter>
         </Modal>
 
-        <Modal isOpen={viewPlan} toggle={toggleViewPlan} style={{ color: ' black' }}>
+        <Modal isOpen={viewPlan} toggle={toggleViewPlan} style={{ color: 'black' }}>
           <ModalHeader toggle={toggleViewPlan}>
             <h2>
               Current Activities
