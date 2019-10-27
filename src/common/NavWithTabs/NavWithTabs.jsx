@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './NavWithTabs.scss';
 import { useAuth0 } from '../authHook';
 
@@ -27,7 +27,8 @@ function NavWithTabs(props) {
   return (
     <div className="navWithTabs">
       <div className="logo">
-        <Link to="/">DateNight</Link>
+        {/* <Link to="/">DateNight</Link> */}
+        DateNight
       </div>
 
       {currentPage === 'map' && (
@@ -62,7 +63,8 @@ function NavWithTabs(props) {
 
         {isAuthenticated && (
           <button className="button" type="button" onClick={() => logout()}>
-            Hello, {user.name}
+            {/* Hello, {user.name} */}
+            Hello, {user.id}
             <i className="fas fa-user-circle" />
           </button>
         )}

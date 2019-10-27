@@ -38,7 +38,7 @@ function Plans(props) {
                 <option value={`${plans[i].daterating} stars`} select="true" disabled hidden>{`${plans[i].daterating} stars`}</option>
                 <option value="1">1 stars</option>
                 <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
+                {/* <option value="3">3 stars</option> */}
                 <option value="4">4 stars</option>
                 <option value="5">5 stars</option>
               </select>

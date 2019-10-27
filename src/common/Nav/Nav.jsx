@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './Nav.scss';
 import { useAuth0 } from '../authHook';
 
@@ -17,7 +17,8 @@ function Nav() {
   return (
     <div className="nav">
       <div className="logo">
-        <Link to="/">DateNight</Link>
+        {/* <Link to="/">DateNight</Link> */}
+        DateNight
       </div>
 
       <div className="account">
@@ -30,7 +31,8 @@ function Nav() {
 
         {isAuthenticated && (
           <button className="button" type="button" onClick={() => logout()}>
-            Hello, {user.name}
+            {/* Hello, {user.name} */}
+            Hello, {user.id}
             <i className="fas fa-user-circle" />
           </button>
         )}

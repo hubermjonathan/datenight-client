@@ -10,7 +10,8 @@ function Map(props) {
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById('mapContainer'), {
       center,
-      zoom: 12,
+      zoom: 1,
+      // zoom: 12,
       disableDefaultUI: true,
     });
 
@@ -71,9 +72,9 @@ function Map(props) {
       });
 
       let popupContentString = '<div class="popup">';
-      if (pins[i].name) {
-        popupContentString += `<div class="title">${pins[i].name}</div>`;
-      }
+      // if (pins[i].name) {
+      //   popupContentString += `<div class="title">${pins[i].name}</div>`;
+      // }
       if (pins[i].rating) {
         popupContentString += `<div>${pins[i].rating} stars</div>`;
       }

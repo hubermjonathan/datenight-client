@@ -131,7 +131,9 @@ function List(props) {
   function getCards() {
     const createdCards = [];
     if (results) {
-      for (let i = 0; i < results.length; i += 1) {
+      const LOOP = results.length >= 7 ? 7 : results.length;
+      for (let i = 0; i < LOOP; i += 1) {
+        // for (let i = 0; i < results.length; i += 1) {
         createdCards.push(
           <div className="listCard" key={`listCard${i}`}>
             <div className="listCardTitle">
@@ -147,8 +149,11 @@ function List(props) {
               )}
             <div className="listCardAddress">{results[i].address}</div>
             {results[i].phone && <div className="listCardPhone">{results[i].phone}</div>}
-            {results[i].website && <a className="listCardWebsite" href={results[i].website}>visit their website</a>}
-            {results[i].website === undefined && <div className="listCardWebsite">no website</div>}
+            {/* {results[i].website &&
+            <a className="listCardWebsite" href={results[i].website}>visit their website</a>} */}
+            <a className="listCardWebsite" href={results[i].website}>visit their website</a>
+            {/* {results[i].website === undefined &&
+            <div className="listCardWebsite">no website</div>} */}
             <div className="listCardHours">{displayHours(results[i].openHours)}</div>
             {isAuthenticated && <button type="button" className="btn btn-primary" onClick={() => { dateplanClick(i); }}>Add</button>}
           </div>,

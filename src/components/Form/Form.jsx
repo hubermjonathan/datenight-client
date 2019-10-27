@@ -43,30 +43,31 @@ function Form() {
   }
 
   function onChangeType(event) {
-    if (type.includes(event.target.value)) {
-      const tempTypes = type.slice();
-      tempTypes.splice(tempTypes.indexOf(event.target.value), 1);
+    // if (type.includes(event.target.value)) {
+    //   const tempTypes = type.slice();
+    //   tempTypes.splice(tempTypes.indexOf(event.target.value), 1);
 
-      setType([...tempTypes]);
+    //   setType([...tempTypes]);
 
-      if (location.lat && type.length - 1 > 0) {
-        setButtonDisabled(false);
-      } else {
-        setButtonDisabled(true);
-      }
-    } else {
-      setType([...type, event.target.value]);
+    //   if (location.lat && type.length - 1 > 0) {
+    //     setButtonDisabled(false);
+    //   } else {
+    //     setButtonDisabled(true);
+    //   }
+    // } else {
+    //   setType([...type, event.target.value]);
 
-      if (location.lat) setButtonDisabled(false);
-    }
+    //   if (location.lat) setButtonDisabled(false);
+    // }
+
+    setType([...type, event.target.value]);
+    if (location.lat) setButtonDisabled(false);
   }
 
   function onChangeMinTime(event) {
     const newValue = parseInt(event.target.value, 10);
     if (Number.isNaN(newValue)) {
       setMinTime(minTime);
-    } else if (newValue < 0) {
-      setMinTime(0);
     } else if (maxTime !== '' && newValue > maxTime) {
       setMinTime(maxTime);
     } else if (newValue > 10) {
@@ -74,6 +75,9 @@ function Form() {
     } else {
       setMinTime(newValue);
     }
+    // else if (newValue < 0) {
+    //  setMinTime(0);
+    // }
   }
 
   function onChangeMaxTime(event) {
