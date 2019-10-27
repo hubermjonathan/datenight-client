@@ -175,7 +175,7 @@ function List(props) {
   function onchangeSort(event) {
     setSortChange(event.target.value);
     const newCards = cards.slice(0);
-    if (sortChange === 'price') {
+    if (sortChange === 'rating') {
       newCards.sort((e1, e2) => {
         if (!e1.props.children[1] && !e2.props.children[1]) {
           return -1;
@@ -197,7 +197,7 @@ function List(props) {
         return 0;
       });
     }
-    if (sortChange === 'rating') {
+    if (sortChange === 'price') {
       newCards.sort((e1, e2) => {
         if (!e1.props.children[0].props.children[2] && !e2.props.children[0].props.children[2]) {
           return -1;
