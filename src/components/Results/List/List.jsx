@@ -120,7 +120,10 @@ function List(props) {
       return '\n Hours not available \n';
     }
     const date = new Date();
-    const today = date.getDay() - 1;
+    let today = date.getDay() - 1;
+    if (today < 0) {
+      today = 6;
+    }
     const h = `Today: ${hours[today].substring(hours[today].indexOf(':') + 2)}`;
     return h;
   }
