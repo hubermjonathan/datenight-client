@@ -72,9 +72,9 @@ function Map(props) {
       });
 
       let popupContentString = '<div class="popup">';
-      // if (pins[i].name) {
-      //   popupContentString += `<div class="title">${pins[i].name}</div>`;
-      // }
+      if (pins[i].name) {
+        popupContentString += `<div class="title">${pins[i].name}</div>`;
+      }
       if (pins[i].rating) {
         popupContentString += `<div>${pins[i].rating} stars</div>`;
       }

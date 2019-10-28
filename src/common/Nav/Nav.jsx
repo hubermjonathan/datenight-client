@@ -31,8 +31,7 @@ function Nav() {
 
         {isAuthenticated && (
           <button className="button" type="button" onClick={() => logout()}>
-            {/* Hello, {user.name} */}
-            Hello, {user.id}
+            Hello, {user.name}
             <i className="fas fa-user-circle" />
           </button>
         )}

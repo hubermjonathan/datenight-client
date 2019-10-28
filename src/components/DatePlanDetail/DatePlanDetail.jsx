@@ -25,9 +25,8 @@ function DatePlanDetail(props) {
           )}
         <div className="detailCardAddress">{item.address}</div>
         {item.phone && <div className="detailCardPhone">{item.phone}</div>}
-        {/* {item.website &&
-        <a className="detailCardWebsite" href={item.website}>visit their website</a>}
-        {item.website === undefined && <div className="detailCardWebsite">no website</div>} */}
+        {item.website && <a className="detailCardWebsite" href={item.website}>visit their website</a>}
+        {item.website === undefined && <div className="detailCardWebsite">no website</div>}
         <a className="detailCardWebsite" href={item.website}>visit their website</a>
       </div>
     ));
@@ -45,7 +44,7 @@ function DatePlanDetail(props) {
       {loading && <div />}
       {!loading && (
         <div className="cards">
-          {/* {name === '' && <div className="detailTitle">404: Dateplan not found</div>} */}
+          {name === '' && <div className="detailTitle">404: Dateplan not found</div>}
           {name !== '' && <div className="detailTitle">{name}</div>}
           {(rating !== null && rating !== -1) && <div className="detailRating">{rating} stars</div>}
           {rating === null && <div className="detailRating">not rated</div>}

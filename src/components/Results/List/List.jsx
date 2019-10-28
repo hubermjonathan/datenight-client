@@ -131,9 +131,7 @@ function List(props) {
   function getCards() {
     const createdCards = [];
     if (results) {
-      const LOOP = results.length >= 7 ? 7 : results.length;
-      for (let i = 0; i < LOOP; i += 1) {
-        // for (let i = 0; i < results.length; i += 1) {
+      for (let i = 0; i < results.length; i += 1) {
         createdCards.push(
           <div className="listCard" key={`listCard${i}`}>
             <div className="listCardTitle">
